@@ -1,10 +1,8 @@
 <template>
   <div  v-if="loggedIn" :key="loggedInKey">
-    <Sidebar @loggedOut="userLoggedOut()" />
-    <div id="nav">  
-        <router-link class="button" to="/home">Home</router-link>
-        <router-link class="button" to="/about">About</router-link>
-    </div>
+    <Sidebar @loggedOut="userLoggedOut()" /> 
+    <Headbar /> 
+    
     <router-view>
     </router-view>
   </div>
@@ -30,12 +28,14 @@
 </template>
 <script>
 import Sidebar from './components/Sidebar.vue';
+import Headbar from './components/Headbar.vue';
 import Utility from './js/functions.js';
 import Swal from 'sweetalert2'
 import Logo from './assets/Logo.png'
  export default {
   components: {
-    Sidebar
+    Sidebar,
+    Headbar
   },
   data() { 
     return {
@@ -157,6 +157,7 @@ button.success {
   width: 5rem;
   border-radius: 2rem;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+
 }
 #login-form {
   display: grid;
@@ -166,15 +167,12 @@ button.success {
   place-content: center;
   place-items: center;
   gap: 1rem;
+
 }
 
 #login-form input {
   height: 2rem;
 }
 
-#restart {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-}
+
 </style>

@@ -1,0 +1,12 @@
+{
+    "dashboard": {
+        "title": "Tableau de bord",
+        "room_stats": "Statistiques des Chambres"
+    },
+    "users": {
+        "title": "Utilisateurs"
+    },
+    "bookings": {
+        "title": "Réservations"
+    }
+}
