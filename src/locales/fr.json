@@ -1,4 +1,19 @@
 {
+    "boot": {
+        "verify": "Vérifier",
+        "login": "Se connecter",
+        "back": "Retour",
+        "titles": {
+            "error": "Erreur",
+            "success": "Ca marche!"
+        },
+        "messages": {
+            "connection_successful": "Connection effectuée avec succès",
+            "connection_unsuccessful": "Le logiciel ne peut pas se connecter au serveur fourni",
+            "detected_error": "Erreur Détectée",
+            "wrong_credentials_no_such_user": "On a pas trouvé un utilisateur avec les informations que vous avez fournies!"
+        }
+    },
     "dashboard": {
         "title": "Tableau de bord",
         "room_stats": "Statistiques des Chambres"

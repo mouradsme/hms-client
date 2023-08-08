@@ -17,8 +17,8 @@
         <input v-if="connectionSuccessful" type="text" placeholder="Utilisateur" name="username" id="username" v-model="username" required />
         <input v-if="connectionSuccessful" type="password" placeholder="Mot de passe" name="password" id="password" v-model="password" required />
         <div class="buttons-list">
-          <button class="success" v-on:click="testConnection()" v-if="!connectionSuccessful">Vérifier</button>
-          <button class="primary" v-on:click="login()" v-if="connectionSuccessful">Se connecter</button>
+          <button class="success" v-on:click="testConnection()" v-if="!connectionSuccessful">{{ $t("boot.verify") }}</button>
+          <button class="primary" v-on:click="login()" v-if="connectionSuccessful">{{ $t("boot.login") }}</button>
 
         </div>
 
@@ -86,17 +86,17 @@ import Logo from './assets/Logo.png'
           
         if (response.code == 'wrong_credentials' || response.code == 'no_such_user') {
             Swal.fire({
-              title: 'Erreur!',
-              text: 'On a pas trouvé un utilisateur avec les informations que vous avez fournies!',
+              title: $("boot.titles.error"),
+              text: $t("boot.messages.wrong_credentials_no_such_user"),
               icon: 'error',
-              confirmButtonText: 'Retour'
+              confirmButtonText: $t("boot.back")
             })
           } else
         Swal.fire({
-          title: 'Erreur!',
-          text: 'Erreur Détectée!',
+          title: $("boot.titles.error"),
+          text: $t("boot.messages.detected_error"),
           icon: 'error',
-          confirmButtonText: 'Retour'
+          confirmButtonText: $t("boot.back")
         })
         
       }
@@ -107,8 +107,8 @@ import Logo from './assets/Logo.png'
       let that = this 
       Utility.testConn(this.ip_address, function() {
         Swal.fire({
-          title: 'Sweet!',
-          text: 'Connection effectuée avec succès',
+          title: $("boot.titles.success"),
+          text: $t("boot.messages.connection_successful"),
           imageUrl: Logo,
           imageWidth: 75,
           imageHeight: 75,
@@ -118,10 +118,10 @@ import Logo from './assets/Logo.png'
         that.connectionSuccessful = true
       }, function() {
         Swal.fire({
-          title: 'Erreur!',
-          text: 'Le logiciel ne peut pas se connecter au serveur fourni!',
+          title: $("boot.titles.success"),
+          text: $t("boot.messages.connection_unsuccessful"),
           icon: 'error',
-          confirmButtonText: 'Retour'
+          confirmButtonText: $t("boot.back")
         })
         that.connectionSuccessful = false
 
