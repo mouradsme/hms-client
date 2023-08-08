@@ -14,16 +14,29 @@
             "wrong_credentials_no_such_user": "On a pas trouvé un utilisateur avec les informations que vous avez fournies!"
         }
     },
+    "buttons": {
+        "create": "Créer"
+    },
     "dashboard": {
         "title": "Tableau de bord",
         "room_stats": "Statistiques des Chambres"
     },
+    "adduser": {
+        "title": "Utilisateurs > Ajouter"
+    },
     "users": {
         "title": "Utilisateurs",
+        "password": {
+            "choose": "Choisissez un mot de passe",
+            "weak": "Mot de passe trop faible",
+            "medium": "Mot de passe à compléxité moyenne",
+            "strong": "Mot de passe difficile à cracker!"
+        },
         "user": {
             "id": "#",
             "name": "Nom",
             "username": "Nom d'utilisateur",
+            "password": "Mot de Passe",
             "role": "Rôle",
             "role_0": "Administrateur",
             "role_1": "Utilisateur Simple"

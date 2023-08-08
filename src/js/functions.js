@@ -52,6 +52,23 @@ var Utility = {
             }
         });
     },
+    getReq(endpoint, data, callbackSuccess, callbackFailure) {
+        let UserAuth = JSON.parse(window.localStorage.UserAuth)
+        $.ajax({
+            type: "GET",
+            url: window.API_URL + endpoint + "?auth_username=" + UserAuth.username + "&auth_password=" + UserAuth.password,
+            data: data,
+            contentType: 'application/json',
+
+            success: function (response) {
+                if (response.status == 'success')
+                    callbackSuccess(response)
+                else
+                callbackFailure(response)
+            }
+        });
+
+    }
 
 }
   

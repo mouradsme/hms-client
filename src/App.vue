@@ -2,7 +2,7 @@
   <div  v-if="loggedIn" :key="loggedInKey">
     <Sidebar v-if="useSideBar" @loggedOut="userLoggedOut()" /> 
     <siine-topbar  @loggedOut="userLoggedOut()"  v-else/>
-    <siine-breadcrumbs :route="$t($route.name + '.title')"/> 
+    <siine-breadcrumbs :route="$route.name"/> 
     
     <router-view>
     </router-view>
@@ -32,7 +32,8 @@ import Sidebar from './components/Sidebar.vue';
 import Utility from './js/functions.js'; 
 import Swal from 'sweetalert2'
 import Logo from './assets/Logo.png'
- export default {
+
+export default {
   components: {
     Sidebar
   },
@@ -77,7 +78,9 @@ import Logo from './assets/Logo.png'
       Utility.login(this.username, this.password, function(response) {
         if (response.status == 'success') {
           localStorage.setItem('loggedIn', true)
-          localStorage.setItem('User', response.data)
+          
+          localStorage.setItem('User', JSON.stringify(response.data))
+          localStorage.setItem('UserAuth', JSON.stringify({ username: that.username, password: that.password}))
            that.loggedIn = true
            that.loggedInKey = (new Date()).getTime()
         }  
@@ -86,17 +89,17 @@ import Logo from './assets/Logo.png'
           
         if (response.code == 'wrong_credentials' || response.code == 'no_such_user') {
             Swal.fire({
-              title: $("boot.titles.error"),
-              text: $t("boot.messages.wrong_credentials_no_such_user"),
+              title: that.$t("boot.titles.error"),
+              text: that.$t("boot.messages.wrong_credentials_no_such_user"),
               icon: 'error',
-              confirmButtonText: $t("boot.back")
+              confirmButtonText: that.$t("boot.back")
             })
           } else
         Swal.fire({
-          title: $("boot.titles.error"),
-          text: $t("boot.messages.detected_error"),
+          title: that.$t("boot.titles.error"),
+          text: that.$t("boot.messages.detected_error"),
           icon: 'error',
-          confirmButtonText: $t("boot.back")
+          confirmButtonText: that.$t("boot.back")
         })
         
       }
@@ -107,8 +110,8 @@ import Logo from './assets/Logo.png'
       let that = this 
       Utility.testConn(this.ip_address, function() {
         Swal.fire({
-          title: $("boot.titles.success"),
-          text: $t("boot.messages.connection_successful"),
+          title: that.$t("boot.titles.success"),
+          text: that.$t("boot.messages.connection_successful"),
           imageUrl: Logo,
           imageWidth: 75,
           imageHeight: 75,
@@ -118,10 +121,10 @@ import Logo from './assets/Logo.png'
         that.connectionSuccessful = true
       }, function() {
         Swal.fire({
-          title: $("boot.titles.success"),
-          text: $t("boot.messages.connection_unsuccessful"),
+          title: that.$t("boot.titles.success"),
+          text: that.$t("boot.messages.connection_unsuccessful"),
           icon: 'error',
-          confirmButtonText: $t("boot.back")
+          confirmButtonText: that.$t("boot.back")
         })
         that.connectionSuccessful = false
 

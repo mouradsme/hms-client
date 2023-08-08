@@ -15,6 +15,7 @@
 </template>
 <script>
 import $ from 'jquery'
+import Utility from '../../js/functions'
   export default {
     name: "Users",
     components: {
@@ -30,15 +31,12 @@ import $ from 'jquery'
     methods: {
       loadUsers() {
         let that = this
-        $.ajax({
-          type: "GET",
-          url:  window.API_URL + "users",
-          data: {},
-          dataType: "json",
-          success: function (response) {
-            that.users = response.users
-          }
-        });
+        Utility.getReq('users', {}, function(response) {
+          that.users = response.users
+         }, function(err) {
+          console.log(err)
+        })
+        
 
       }
     }

@@ -2,18 +2,11 @@
         <div id="main-topbar" >
             <div class="sidebar-items">
 
-                <router-link to="/" class="sidebar-item" :title="$t('dashboard.title')">
-                    <font-awesome-icon :icon="['fa', 'dashboard']" />
-                </router-link>
-
-                <router-link to="/bookings" class="sidebar-item" :title="$t('bookings.title')">
-                    <font-awesome-icon :icon="['fas', 'calendar-days']" />
-                </router-link>
-
-                <router-link to="/users" class="sidebar-item" :title="$t('users.title')">
-                    <font-awesome-icon :icon="['fa', 'users']" />
-                </router-link>
-
+                <template v-for="menuItem in menuItems" :key="menuItem">
+                    <router-link v-if="menuItem.show"  :to="menuItem.path" class="sidebar-item" :title="$t(menuItem.name + '.title')">
+                        <font-awesome-icon :icon="menuItem.icon"  />
+                    </router-link> 
+                </template>
 
 
             </div>
@@ -23,13 +16,13 @@
   </template>
 
 <script>
-
+import menuItems from '../configs/menu';
 export default {
     name: "Topbar",
 
     data() {
         return {
-
+            menuItems
         }
     },
     mounted() {
