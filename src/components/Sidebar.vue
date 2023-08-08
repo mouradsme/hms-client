@@ -57,7 +57,7 @@ export default {
 }
 </script>
 <style   scoped> 
-    .logo {
+    #main-sidebar  .logo {
         width: 5rem;
         height: auto;
     }

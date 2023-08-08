@@ -3,17 +3,22 @@
   src: url('assets/fonts/Poppins/Poppins-Regular.ttf')  format('truetype')
 }
 
-:root {
-  font-family: Poppins;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+:root {    
+  --topbar-height: 2rem;
+  --breadcrumbs-height: 2.5rem;
   --main-color: #0f54ef;
   --main-color-hovered: #4f81f5;
   --secondary-color: #D9F6F7;
   --white-color: #fbfcfc;
   --dark-color: #08308d;
+  --black-color: #021338;
   --accent-color: #259294; 
+  --danger-color: #DA0027;
+
+  font-family: Poppins;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
   color: #0f0f0f;
   background-color: #f6f6f6;
 
@@ -27,6 +32,9 @@
   user-select: none !important;
   box-sizing: border-box;
 }
+body {
+  overflow-x: hidden;
+}
 .container {
   margin: 0;
   padding-top: 10vh;
@@ -34,13 +42,6 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
 }
  
 
@@ -99,7 +100,6 @@ button {
 .view-container {
   padding: 1rem;
   padding-left: 1.25rem;
-  background-color: var(--white-color);
   display: block;
   height: calc(100vh - 6rem);
   width: calc(100vw - 2rem);

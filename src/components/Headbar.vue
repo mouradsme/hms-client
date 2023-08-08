@@ -1,9 +1,6 @@
 <template>
         
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="../assets/Logo.png" alt="Siine" class="logo">
-            </div>
+        <div class="header-container"> 
             <div class="breadcrumbs">
                 <h3 class="breadcrumbs-title">{{ $t("dashboard.title") }}</h3>
             </div>
@@ -11,8 +8,7 @@
         
   </template>
 
-<script>
-import $ from 'jquery'
+<script>  
 
 export default {
     data() {
@@ -27,32 +23,14 @@ export default {
     }
 }
 </script>
-<style   scoped> 
-    .logo {
-        width: 5rem;
-        height: auto;
-    }
-
+<style   scoped>  
 .header-container {
   display: grid;
   grid-template-columns: 1fr 3fr 3fr 1fr; 
   height: 3.5rem;
   grid-template-rows: 3.5rem;
   
-  } 
-  .header-container .logo-container {
-    display: grid;
-    grid-template-rows: 3rem;
-    place-content: center;
-    place-items: center;
-
-  }
-   .logo-container .logo {
-    height: 100%;
-    width: auto;
-    border-radius: 2.1rem;
-    
-  }
+  }  
 .breadcrumbs-title { 
   font-size: 1rem;
   color:#3490dc;

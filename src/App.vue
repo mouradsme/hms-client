@@ -1,7 +1,8 @@
 <template>
   <div  v-if="loggedIn" :key="loggedInKey">
-    <Sidebar @loggedOut="userLoggedOut()" /> 
-    <Headbar /> 
+    <Sidebar v-if="useSideBar" @loggedOut="userLoggedOut()" /> 
+    <siine-topbar  @loggedOut="userLoggedOut()"  v-else/>
+    <siine-breadcrumbs :route="$t($route.name + '.title')"/> 
     
     <router-view>
     </router-view>
@@ -28,17 +29,16 @@
 </template>
 <script>
 import Sidebar from './components/Sidebar.vue';
-import Headbar from './components/Headbar.vue';
-import Utility from './js/functions.js';
+import Utility from './js/functions.js'; 
 import Swal from 'sweetalert2'
 import Logo from './assets/Logo.png'
  export default {
   components: {
-    Sidebar,
-    Headbar
+    Sidebar
   },
   data() { 
     return {
+      useSideBar: false,
       ip_address: '', // Server IP Address
       username: '',   // Login username
       password: '',   // Login Password
@@ -51,11 +51,12 @@ import Logo from './assets/Logo.png'
   beforeMount() {
     // Prepare IP Address and Login Status if they've already been set up by the user
     this.ip_address = localStorage.getItem('ip_address') ?? ''
+    window.API_URL = "http://" + this.ip_address + window.API_PATH
     this.loggedIn = localStorage.getItem('loggedIn') ?? false
   },  
   mounted() {
    },
-  methods: {
+  methods: { 
     userLoggedOut() {
           localStorage.setItem('loggedIn', false)
           this.loggedIn = false
@@ -65,6 +66,7 @@ import Logo from './assets/Logo.png'
     restartConn() {
       localStorage.setItem('ip_address', '');
       this.ip_address = ''
+      window.API_URL = this.ip_address
       this.connectionSuccessful = false
       localStorage.setItem('loggedIn', false)
       this.loggedIn = false
@@ -102,7 +104,7 @@ import Logo from './assets/Logo.png'
 
     },
     testConnection() {
-      let that = this
+      let that = this 
       Utility.testConn(this.ip_address, function() {
         Swal.fire({
           title: 'Sweet!',

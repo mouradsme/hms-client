@@ -4,7 +4,15 @@
         "room_stats": "Statistiques des Chambres"
     },
     "users": {
-        "title": "Utilisateurs"
+        "title": "Utilisateurs",
+        "user": {
+            "id": "#",
+            "name": "Nom",
+            "username": "Nom d'utilisateur",
+            "role": "Rôle",
+            "role_0": "Administrateur",
+            "role_1": "Utilisateur Simple"
+        }
     },
     "bookings": {
         "title": "Réservations"
