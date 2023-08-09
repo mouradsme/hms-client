@@ -23,7 +23,7 @@ export default {
     }
 }
 </script>
-<style   scoped>  
+<style>  
 .header-container {
   display: grid;
   grid-template-columns: 1fr 3fr 3fr 1fr; 

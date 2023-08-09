@@ -8,8 +8,8 @@ import { loadPlugins } from './configs/plugins';
 import { loadComponents } from './configs/components';
 
 /* Styles imports  */
-import 'primeflex/primeflex.css';
 import "primevue/resources/themes/lara-light-indigo/theme.css";
+import 'primeflex/primeflex.css';
 import "./styles.css";
 
 /* Main App View Import  */  

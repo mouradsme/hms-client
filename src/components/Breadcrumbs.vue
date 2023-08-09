@@ -43,7 +43,8 @@ methods: {
     height: var(--breadcrumbs-height);
     margin-bottom: .5rem;
     background-color: var(--white-color);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.33);
+    box-shadow: inset 1px 2px 2px rgba(0, 0, 0, 0.33),
+                      1px 1px 10px rgba(0, 0, 0, 0.33);
 }  
 #breadcrumbs-container .breadcrumbs {
     display: grid; 
