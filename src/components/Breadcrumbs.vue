@@ -29,7 +29,7 @@ data() {
      }
 },
 mounted() {
-    console.log(this.$props.route)
+
 }, 
 methods: {
 }

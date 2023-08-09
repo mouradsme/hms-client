@@ -43,7 +43,6 @@ import Utility from '../../js/functions'
           that.users = response.users
           that.loading = false
          }, function(err) {
-          console.log(err)
           that.loading = false
         })
         

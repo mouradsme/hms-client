@@ -87,10 +87,8 @@ import Utility from '../../js/functions'
         } 
         this.loading = true
         Utility.postReq('users', data, function(response) {
-          console.log(response)
           that.loading = false
          }, function(err) {
-          console.log(err)
           that.loading = false
         })
 

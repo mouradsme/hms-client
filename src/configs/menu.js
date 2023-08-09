@@ -1,6 +1,5 @@
 
 let User       = JSON.parse(localStorage.getItem('User'))
-console.log(User)
 const menuItems = [
     {
         name: 'dashboard',
