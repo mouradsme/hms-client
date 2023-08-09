@@ -24,6 +24,11 @@
     "adduser": {
         "title": "Utilisateurs > Ajouter"
     },
+    "roles": {
+        "admin": "Administrateur",
+        "normal": "Utilisateur",
+        "other": "Autre"
+    },
     "users": {
         "title": "Utilisateurs",
         "password": {
@@ -37,10 +42,14 @@
             "name": "Nom",
             "username": "Nom d'utilisateur",
             "password": "Mot de Passe",
+            "password_confirmation": "Confirmation du Mot de Passe",
             "role": "Rôle",
             "role_0": "Administrateur",
             "role_1": "Utilisateur Simple"
         }
+    },
+    "rooms": {
+        "title": "Chambres"
     },
     "bookings": {
         "title": "Réservations"

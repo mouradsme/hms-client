@@ -1,13 +1,16 @@
 /* Globals */
-window.API_PATH = "/public/api/v1/"
+import './configs/globals'
+
 /* App, Components & Plugins imports  */
 import { createApp } from 'vue'
+// Do not change the order of these imports!
+import { loadPlugins } from './configs/plugins'; 
 import { loadComponents } from './configs/components';
-import { loadPlugins } from './configs/plugins';
 
 /* Styles imports  */
-import "./styles.css";
+import 'primeflex/primeflex.css';
 import "primevue/resources/themes/lara-light-indigo/theme.css";
+import "./styles.css";
 
 /* Main App View Import  */  
 import App from './App.vue' 

@@ -1,6 +1,6 @@
 
 let User       = JSON.parse(localStorage.getItem('User'))
-
+console.log(User)
 const menuItems = [
     {
         name: 'dashboard',
@@ -18,6 +18,12 @@ const menuItems = [
         name: 'users',
         icon: ['fa', 'users'],
         path: '/users',
+        show: User.role <= 0
+    },
+    {
+        name: 'rooms',
+        icon: ['fa', 'bed'],
+        path: '/rooms',
         show: User.role <= 0
     },
 

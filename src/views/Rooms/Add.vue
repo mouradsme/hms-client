@@ -4,12 +4,6 @@
         <div class="form">
             <div class="p-inputgroup flex-1">
                 <span class="p-inputgroup-addon">
-                    <font-awesome-icon :icon="['fa', 'person']" />
-                </span>
-                <InputText v-model="user_name"  :placeholder="$t('users.user.name')" />
-            </div>
-            <div class="p-inputgroup flex-1">
-                <span class="p-inputgroup-addon">
                     <font-awesome-icon :icon="['fa', 'user']" />
                 </span>
                 <InputText v-model="user_username"  :placeholder="$t('users.user.username')" />
@@ -32,25 +26,18 @@
 
             <div class="radios">
                 <label for="admin" class="radio-item">
-                    <RadioButton v-model="role" inputId="admin" name="role" value="0" />
+                    <RadioButton v-model="role" inputId="admin" name="role" :value="$t('roles.admin')" />
                     <span>{{ $t('roles.admin') }}</span>
                 </label>  
                 <label for="normal" class="radio-item">
-                    <RadioButton v-model="role" inputId="normal" name="role" value="1" />
+                    <RadioButton v-model="role" inputId="normal" name="role" :value="$t('roles.normal')" />
                     <span>{{ $t('roles.normal') }}</span>
                 </label>
                 <label for="other" class="radio-item">
-                    <RadioButton v-model="role" inputId="other" name="role" value="2" />
+                    <RadioButton v-model="role" inputId="other" name="role" :value="$t('roles.other')" />
                     <span>{{ $t('roles.other') }}</span>
                 </label> 
                 
-            </div>
-            <div class="buttons">
-              <Button v-on:click="addUser()" severity="success" >{{ $t('buttons.create')  }}</Button>
-            </div>  
-            <div class="loader-container">
-                <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--main-color)"
-                    animationDuration=".5s" v-if="loading" />
             </div>
 
 
@@ -58,7 +45,7 @@
       </div>
 </template>
 <script>
-import Utility from '../../js/functions'
+import $ from 'jquery'
   export default {
     name: "Add User",
     components: {
@@ -67,32 +54,25 @@ import Utility from '../../js/functions'
       return { 
         user_password: '',
         user_username: '',
-        user_name: '',
         user_password_confirmation: '',
-        role: 2,
-        loading: false,
+        role: 'normal',
+        errorMessage: 'cc'
        }
     },
     mounted() {
      }, 
     methods: {
-      addUser() {
+      loadUsers() {
         let that = this
-        let data = {
-          name: that.user_name,
-          username: that.user_username,
-          password: that.user_password,
-          confirm: that.user_password_confirmation,
-          role: that.role
-        } 
-        this.loading = true
-        Utility.postReq('users', data, function(response) {
-          console.log(response)
-          that.loading = false
-         }, function(err) {
-          console.log(err)
-          that.loading = false
-        })
+        $.ajax({
+          type: "GET",
+          url:  window.API_URL + "users",
+          data: {},
+          dataType: "json",
+          success: function (response) {
+            that.users = response.users
+          }
+        });
 
       }
     }
@@ -118,10 +98,5 @@ import Utility from '../../js/functions'
   border: 1px solid rgba(0, 0, 0, 0.24);
   background-color:var(--white-color) ;
   cursor: pointer;
-}
-
-.loader-container {
-  width: 100%;
-  text-align: center;
 }
 </style>

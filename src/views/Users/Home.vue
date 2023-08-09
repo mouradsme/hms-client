@@ -10,7 +10,13 @@
                 {{ $t("users.user.role_" + slotProps.data.role) }}
             </template> 
           </Column>
-      </DataTable> 
+     
+      </DataTable>      
+          <div class="loader-container">
+              <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--main-color)"
+                  animationDuration=".5s" v-if="loading" />
+          </div>
+      
       </div>
 </template>
 <script>
@@ -22,6 +28,7 @@ import Utility from '../../js/functions'
     },
     data () {
       return { 
+        loading: true,
         users: [],
       }
     },
@@ -31,10 +38,13 @@ import Utility from '../../js/functions'
     methods: {
       loadUsers() {
         let that = this
+        this.loading = true
         Utility.getReq('users', {}, function(response) {
           that.users = response.users
+          that.loading = false
          }, function(err) {
           console.log(err)
+          that.loading = false
         })
         
 
@@ -43,6 +53,9 @@ import Utility from '../../js/functions'
   }
 </script>
 
-<style scoped>
-
+<style >
+.loader-container {
+  width: 100%;
+  text-align: center;
+}
 </style>

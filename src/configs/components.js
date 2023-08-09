@@ -9,6 +9,10 @@ import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import FontAwesomeIcon from './icons'; // Icons imports
+import ProgressSpinner from 'primevue/progressspinner';
+import RadioButton from 'primevue/radiobutton';
+import DataView from 'primevue/dataview';
+import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
 
 export function loadComponents(app) {
     app .component('font-awesome-icon', FontAwesomeIcon)
@@ -19,6 +23,10 @@ export function loadComponents(app) {
         .component('DataTable', DataTable)
         .component('Column', Column)
         .component('InputText', InputText)
-        .component('Password', Password);
+        .component('Password', Password)
+        .component('ProgressSpinner', ProgressSpinner)
+        .component('RadioButton', RadioButton)
+        .component('DataView', DataView)
+        .component('DataViewLayoutOptions', DataViewLayoutOptions)
     return app;
 }

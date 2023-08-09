@@ -18,7 +18,7 @@ var Utility = {
         })
     },
      testConn(ip, callbackSuccess, callbackFailure) {
-        let Address = "http://" + ip + "/public/api/"
+        let Address = "http://" + ip + window.API_PATH
         let testURL = Address + "test"
         $.ajax({
             type: "GET",
@@ -35,7 +35,7 @@ var Utility = {
     },
 
     login(username, password, callbackSuccess, callbackFailure) {
-        let Address = "http://" + localStorage.getItem('ip_address') + "/public/api/"
+        let Address = "http://" + localStorage.getItem('ip_address') + window.API_PATH
         let loginURL = Address + "authenticate"
         
         $.ajax({
@@ -67,6 +67,33 @@ var Utility = {
                 callbackFailure(response)
             }
         });
+
+    },
+    postReq(endpoint, data, callbackSuccess, callbackFailure) {
+
+        let UserAuth = JSON.parse(window.localStorage.UserAuth) 
+
+        var settings = {
+            "url": window.API_URL + endpoint + "?auth_username=" + UserAuth.username + "&auth_password=" + UserAuth.password,
+            "method": "POST",
+            "data": data,
+            "timeout": 0,
+            "headers": {
+             },
+          };
+          
+          $.ajax(settings).done(function (response) {
+            if (response.status == 'success')
+                callbackSuccess(response)
+            else
+            callbackFailure(response)
+          });
+
+
+
+
+
+         
 
     }
 

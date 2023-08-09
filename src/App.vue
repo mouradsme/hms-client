@@ -83,6 +83,7 @@ export default {
           localStorage.setItem('UserAuth', JSON.stringify({ username: that.username, password: that.password}))
            that.loggedIn = true
            that.loggedInKey = (new Date()).getTime()
+           window.location.href = "/"
         }  
       }, function(response) {
         

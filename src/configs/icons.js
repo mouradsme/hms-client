@@ -10,7 +10,9 @@ import {
     faLock,
     faCalendarDays, 
     faAdd, 
-    faPlus 
+    faPlus,
+    faBed,
+    faPerson
 } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -25,5 +27,7 @@ import {
  library.add(faPlus)
  library.add(faUser)
  library.add(faLock)
-
+ library.add(faBed)
+ library.add(faPerson)
+ 
  export default FontAwesomeIcon;
