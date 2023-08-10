@@ -11,12 +11,15 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import InputText from 'primevue/inputtext';
 import InputNumber from 'primevue/inputnumber';
+import InputSwitch from 'primevue/inputswitch';
+import Dropdown from 'primevue/dropdown';
 import Password from 'primevue/password';
 import FontAwesomeIcon from './icons'; // Icons imports
 import ProgressSpinner from 'primevue/progressspinner';
 import RadioButton from 'primevue/radiobutton';
 import DataView from 'primevue/dataview';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
+import Editor from 'primevue/editor';
 
 export function loadComponents(app) {
     app .component('font-awesome-icon', FontAwesomeIcon)
@@ -34,5 +37,10 @@ export function loadComponents(app) {
         .component('RadioButton', RadioButton)
         .component('DataView', DataView)
         .component('DataViewLayoutOptions', DataViewLayoutOptions)
+        .component('Dropdown', Dropdown)
+        .component('Editor', Editor) 
+        .component('InputSwitch', InputSwitch) 
+
+        
     return app;
 }

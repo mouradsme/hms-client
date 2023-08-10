@@ -56,7 +56,18 @@
         "title": "Chambres",
         "room": {
             "name": "Nom/Alias",
-            "number": "Numero"
+            "number": "Numero",
+            "floor": "Etage",
+            "type": "Type",
+            "description": "Description",
+            "price": "Prix",
+            "vat": "TVA %",
+            "price_vat": "Prix TVA",
+            "n_beds": "Nombre de lits",
+            "n_people": "Nombre de personnes",
+            "n_babies": "Nombre de bébés",
+            "refundable": "Remboursable",
+            "usable": "Utilisable"
 
 
         }
