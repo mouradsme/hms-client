@@ -12,7 +12,8 @@ import {
     faAdd, 
     faPlus,
     faBed,
-    faPerson
+    faPerson,
+    faBackward
 } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -29,5 +30,6 @@ import {
  library.add(faLock)
  library.add(faBed)
  library.add(faPerson)
+ library.add(faBackward)
  
  export default FontAwesomeIcon;

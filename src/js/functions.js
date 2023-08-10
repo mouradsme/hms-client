@@ -52,6 +52,28 @@ var Utility = {
             }
         });
     },
+    getDefferedReq(endpoint, data) {
+        var defer = $.Deferred(); 
+        let UserAuth = JSON.parse(window.localStorage.UserAuth)
+        $.ajax({
+            type: "GET",
+            url: window.API_URL + endpoint + "?auth_username=" + UserAuth.username + "&auth_password=" + UserAuth.password,
+            data: data,
+            contentType: 'application/json',
+
+            success: function (response) {
+                if (response.status == 'success')
+                    defer.resolve(response)
+                else
+                defer.reject(response)
+            }, 
+            error: function(req, status, err) { 
+              defer.reject(err); 
+            } 
+        });
+        return defer.promise();
+
+    },
     getReq(endpoint, data, callbackSuccess, callbackFailure) {
         let UserAuth = JSON.parse(window.localStorage.UserAuth)
         $.ajax({
@@ -87,13 +109,7 @@ var Utility = {
                 callbackSuccess(response)
             else
             callbackFailure(response)
-          });
-
-
-
-
-
-         
+          });       
 
     }
 

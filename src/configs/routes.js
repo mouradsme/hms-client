@@ -4,6 +4,7 @@ import BookingsHome from '../views/Bookings/Home.vue'
 
 
 import RoomsHome from '../views/Rooms/Home.vue'
+import AddRoom from '../views/Rooms/Add.vue'
 
 import UsersHome from '../views/Users/Home.vue'
 import AddUser from '../views/Users/Add.vue'
@@ -40,6 +41,13 @@ const routes = [
  
     },
     { 
+        path: '/rooms/add', 
+        component: AddRoom, 
+        name: "rooms_add",
+        beforeEnter : adminOnly,
+ 
+    },
+    { 
         path: '/users', 
         component: UsersHome, 
         name: "users",
@@ -49,7 +57,7 @@ const routes = [
     { 
         path: '/users/add', 
         component: AddUser, 
-        name: "adduser",
+        name: "users_add",
         beforeEnter : adminOnly,
     },
 ]

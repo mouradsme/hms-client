@@ -1,80 +1,41 @@
 <template> 
 
     <div class="view-container"> 
+      <siine-viewcontrols :routes='[
+          { route: "/rooms", class: "back", title: this.$t("buttons.back"), icon: "backward"}
+        ]'/>
+
         <div class="form">
             <div class="p-inputgroup flex-1">
-                <span class="p-inputgroup-addon">
-                    <font-awesome-icon :icon="['fa', 'user']" />
-                </span>
-                <InputText v-model="user_username"  :placeholder="$t('users.user.username')" />
-            </div>
-            <div class="p-inputgroup flex-1">
-                <span class="p-inputgroup-addon">
-                    <font-awesome-icon :icon="['fa', 'lock']" />
-                </span>
-                <Password 
-                    v-model="user_password"  
-                    :promptLabel="$t('users.password.choose')" 
-                    :weakLabel="$t('users.password.weak')" 
-                    :mediumLabel="$t('users.password.medium')" 
-                    :strongLabel="$t('users.password.strong')"
-                    :placeholder="$t('users.user.password')"/>
-                <Password 
-                    v-model="user_password_confirmation"  
-                    :placeholder="$t('users.user.password_confirmation')"/>
-            </div>
+                <InputText v-model="room_name"  :placeholder="$t('rooms.room.name')" /> 
+                <InputNumber v-model="room_number" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.number')" /> 
 
-            <div class="radios">
-                <label for="admin" class="radio-item">
-                    <RadioButton v-model="role" inputId="admin" name="role" :value="$t('roles.admin')" />
-                    <span>{{ $t('roles.admin') }}</span>
-                </label>  
-                <label for="normal" class="radio-item">
-                    <RadioButton v-model="role" inputId="normal" name="role" :value="$t('roles.normal')" />
-                    <span>{{ $t('roles.normal') }}</span>
-                </label>
-                <label for="other" class="radio-item">
-                    <RadioButton v-model="role" inputId="other" name="role" :value="$t('roles.other')" />
-                    <span>{{ $t('roles.other') }}</span>
-                </label> 
-                
             </div>
-
+            
 
         </div>
       </div>
 </template>
 <script>
-import $ from 'jquery'
+import $ from 'jquery' 
+import Utility from '../../js/functions'
   export default {
-    name: "Add User",
+    name: "Add Room",
     components: {
     },
     data () {
-      return { 
-        user_password: '',
-        user_username: '',
-        user_password_confirmation: '',
-        role: 'normal',
-        errorMessage: 'cc'
+      return {  
+        room_number: 101,
+        room_name: "Room 101"
+          
        }
+    },
+    beforeMount() {
+      let Users = Utility.getDefferedReq('users', {})
     },
     mounted() {
      }, 
-    methods: {
-      loadUsers() {
-        let that = this
-        $.ajax({
-          type: "GET",
-          url:  window.API_URL + "users",
-          data: {},
-          dataType: "json",
-          success: function (response) {
-            that.users = response.users
-          }
-        });
-
-      }
+    methods: { 
     }
   }
 </script>

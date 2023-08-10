@@ -1,6 +1,10 @@
 <template> 
 
     <div class="view-container"> 
+        <siine-viewcontrols :routes='[
+          { route: "/users/add", class: "add", title: this.$t("buttons.create"), icon: "plus"}
+        ]'/>
+        
         <DataTable :value="users" tableStyle="min-width: 50rem">
           <Column field="id" :header="$t('users.user.id')"></Column>
           <Column field="name" :header="$t('users.user.name')"></Column>
@@ -19,35 +23,27 @@
       
       </div>
 </template>
-<script>
-import $ from 'jquery'
+<script> 
 import Utility from '../../js/functions'
   export default {
     name: "Users",
     components: {
     },
     data () {
-      return { 
+       return { 
         loading: true,
         users: [],
       }
     },
-    mounted() {
-      this.loadUsers()
+    beforeMount() {
+      let that = this
+      Utility.getDefferedReq('users', {}).then( response => that.loadUsers(response) )
     }, 
     methods: {
-      loadUsers() {
-        let that = this
-        this.loading = true
-        Utility.getReq('users', {}, function(response) {
-          that.users = response.users
-          that.loading = false
-         }, function(err) {
-          that.loading = false
-        })
-        
-
-      }
+      loadUsers(data) {
+        this.users = data.status == 'success' ? data.users : []
+        this.loading = false
+      } 
     }
   }
 </script>

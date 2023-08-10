@@ -6,13 +6,6 @@
             <span class="breadcrumbs-title">{{$t( route + '.title' ) }}</span>
 
         </div>
-        <div class="controls">
-
-            <router-link to="/users/add" class="control add" :title="$t('buttons.create')">
-                <font-awesome-icon :icon="['fa', 'plus']" />
-            </router-link>
-            
-         </div>
     </div> 
     
 </template>
@@ -27,6 +20,8 @@ export default {
 data() {
     return {
      }
+},
+beforeMount() {
 },
 mounted() {
 
@@ -64,19 +59,4 @@ methods: {
     width: var(--breadcrumbs-height); 
 }
 
-#breadcrumbs-container .controls {
-    display: grid; 
-    grid-auto-flow: column;
-    height:  var(--breadcrumbs-height);
-}
-#breadcrumbs-container .controls .control {
-    display: grid; 
-    place-content: center;
-    height: var(--breadcrumbs-height);
-    width: var(--breadcrumbs-height); 
-}
-#breadcrumbs-container .controls .control.add {
-    background-color: var(--success-color);
-    color: var(--white-color);
-}
 </style>

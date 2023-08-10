@@ -15,20 +15,24 @@
         }
     },
     "buttons": {
-        "create": "Créer"
+        "create": "Créer",
+        "back": "Retour"
     },
     "dashboard": {
         "title": "Tableau de bord",
         "room_stats": "Statistiques des Chambres"
     },
-    "adduser": {
+    "rooms_add": {
+        "title": "Chambres > Ajouter"
+    },
+    "users_add": {
         "title": "Utilisateurs > Ajouter"
     },
     "roles": {
         "admin": "Administrateur",
         "normal": "Utilisateur",
         "other": "Autre"
-    },
+    }, 
     "users": {
         "title": "Utilisateurs",
         "password": {
@@ -49,7 +53,13 @@
         }
     },
     "rooms": {
-        "title": "Chambres"
+        "title": "Chambres",
+        "room": {
+            "name": "Nom/Alias",
+            "number": "Numero"
+
+
+        }
     },
     "bookings": {
         "title": "Réservations"

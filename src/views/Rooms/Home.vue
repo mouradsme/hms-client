@@ -1,7 +1,11 @@
 
 <template>
-  <div class="card">
-      <DataView :value="users" :layout="layout">
+  <div class="view-container">
+        <siine-viewcontrols :routes='[
+          { route: "/rooms/add", class: "add", title: this.$t("buttons.create"), icon: "plus"}
+        ]'/>
+
+      <DataView :value="rooms" :layout="layout">
           <template #header>
               <div class="flex justify-content-end">
                   <DataViewLayoutOptions v-model="layout" />
@@ -54,7 +58,6 @@
 
 <script>
 import Utility from '../../js/functions'
-import API from '../../js/apiCalls'
   export default {
     name: "Rooms",
     components: {
@@ -62,16 +65,21 @@ import API from '../../js/apiCalls'
     data () {
       return { 
         loading: true,
-        users: [],
+        rooms: [],
         layout: 'grid'
       }
     },
     beforeMount() {
-      API.loadUsers()
-      this.users = API.getResults()
-     }, 
-    methods: {
+      let that = this
+      Utility.getDefferedReq('rooms', {}).then( response => that.loadRooms(response) )
       
+    }, 
+    methods: {
+        loadRooms() {
+        this.rooms = data.status == 'success' ? data.rooms : []
+        this.loading = false
+
+      }
     }
   }
 </script>

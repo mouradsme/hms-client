@@ -2,30 +2,28 @@ import Utility from './functions'
  
 const API = {
     lastResult: null,
-    loading: false,
     getResults() {
         return this.lastResult
+    }, 
+    loadRoomTypes() {
+        
     },
     async loadUsers() {
-        let that = this
-        this.loading = true
+        let result = null
+        
         await Utility.getReq('users', {}, function(response) {
-          that.lastResult = response.users
-          that.loading = false
+          result = response.users
          }, function(err) {
-          that.loading = false
         })
+        return result
         
     },
 
     async addUser(data) {
         let that = this
-        this.loading = true
         await Utility.postReq('users', data, function(response) {
           that.lastResult = response
-          that.loading = false
          }, function(err) {
-          that.loading = false
         })
 
     }

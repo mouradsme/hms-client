@@ -1,6 +1,11 @@
 <template> 
 
     <div class="view-container"> 
+      <siine-viewcontrols :routes='[
+          { route: "/users", class: "back", title: this.$t("buttons.back"), icon: "backward"}
+        ]'/>
+
+
         <div class="form">
             <div class="p-inputgroup flex-1">
                 <span class="p-inputgroup-addon">
