@@ -99,13 +99,13 @@ button {
 }
  
 .view-container {
-  padding: 1rem;
+  padding: 2rem;
   padding-left: 1.25rem;
   display: block;
-  height: calc(100vh - 6rem);
+  min-height: calc(100vh - 6rem);
   width: calc(100vw - 2rem);
   margin: auto;
-  border-radius: 1rem;
+  border-radius: 1rem; 
 
 }
 .view-subtitle {

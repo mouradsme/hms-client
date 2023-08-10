@@ -3,26 +3,27 @@
     <div class="view-container"> 
       <siine-viewcontrols :routes='[
           { route: "/rooms", class: "back", title: this.$t("buttons.back"), icon: "backward"}
+
         ]'/>
 
         <div class="form">
             <div class="p-inputgroup flex-1">
-              <InputText v-model="room_name"  :placeholder="$t('rooms.room.name')" /> 
+              <InputText autocomplete="off"  v-model="room_name"  :placeholder="$t('rooms.room.name')" /> 
               <Dropdown v-model="room_type" :options="room_types" optionLabel="name" :placeholder="$t('rooms.room.type')" class="w-full md:w-14rem" />
             </div>
             <div class="p-inputgroup flex-1">
-                <InputNumber v-model="room_number" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.number')" /> 
-                <InputNumber v-model="floor_number" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.floor')" /> 
+                <InputNumber autocomplete="off"  v-model="room_number" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.number')" /> 
+                <InputNumber autocomplete="off"  v-model="floor_number" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.floor')" /> 
             </div> 
             <div class="p-inputgroup flex-1">
-                <InputNumber v-model="number_of_beds" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_beds')" /> 
-                <InputNumber v-model="number_of_people" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_people')" /> 
-                <InputNumber v-model="number_of_babies" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_babies')" /> 
+                <InputNumber autocomplete="off"  v-model="number_of_beds" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_beds')" /> 
+                <InputNumber autocomplete="off"  v-model="number_of_people" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_people')" /> 
+                <InputNumber autocomplete="off"  v-model="number_of_babies" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_babies')" /> 
             </div> 
             <div class="p-inputgroup flex-1">
-                <InputNumber v-model="default_price" :placeholder="$t('rooms.room.price')" /> 
-                <InputNumber v-model="default_tax" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
-                <InputNumber v-model="default_price_vat" disabled :placeholder="$t('rooms.room.price_vat')" /> 
+                <InputNumber autocomplete="off"  v-model="default_price" :placeholder="$t('rooms.room.price')" /> 
+                <InputNumber autocomplete="off"  v-model="default_tax" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
+                <InputNumber autocomplete="off"  v-model="default_price_vat" disabled :placeholder="$t('rooms.room.price_vat')" /> 
             </div>
 
             <div class="switch-container p-inputgroup flex-1">
@@ -36,15 +37,13 @@
               </div>
             </div>
 
-
-
-
             <h3>{{ $t('rooms.room.description') }}</h3>
             <div class="p-inputgroup flex-1">
               <Editor v-model="description" editorStyle="height: 20rem" />
 
             </div>
             
+            <Button severity="success" >Ok</Button>
             
 
 
@@ -78,7 +77,7 @@ import Utility from '../../js/functions'
     },
     beforeMount() {
       let that = this
-      Utility.getDefferedReq('roomtypes', {}).then( response => that.loadRoomTypes(response) )
+      Utility.getDefferedReq('rooms/types', {}).then( response => that.loadRoomTypes(response) )
     }, 
     methods: { 
       loadRoomTypes(data) {
