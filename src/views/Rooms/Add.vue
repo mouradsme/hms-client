@@ -17,7 +17,6 @@
       </div>
 </template>
 <script>
-import $ from 'jquery' 
 import Utility from '../../js/functions'
   export default {
     name: "Add Room",
