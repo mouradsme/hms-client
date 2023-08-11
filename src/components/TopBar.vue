@@ -64,7 +64,7 @@ export default {
 }
 #main-topbar .sidebar-items .sidebar-item {
     color: var(--white-color);
-    font-size: calc(var(--topbar-height) * 0.5);
+    font-size: calc(var(--topbar-height) * 0.75);
 }
 #logout {
     all: unset;

@@ -21,9 +21,9 @@
                 <InputNumber autocomplete="off"  v-model="number_of_babies" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_babies')" /> 
             </div> 
             <div class="p-inputgroup flex-1">
-                <InputNumber autocomplete="off"  v-model="default_price" :placeholder="$t('rooms.room.price')" /> 
-                <InputNumber autocomplete="off"  v-model="default_tax" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
-                <InputNumber autocomplete="off"  v-model="default_price_vat" disabled :placeholder="$t('rooms.room.price_vat')" /> 
+                <InputNumber autocomplete="off" @keyup="calculate($e)" @input="calculateVat()" mode="currency" locale="DZ-fr" currency="DZD"  :min="0" v-model="default_price" :placeholder="$t('rooms.room.price')" /> 
+                <InputNumber autocomplete="off" @keyup="calculate($e)" @input="calculateVat()" :min="0" :max="100"  v-model="default_vat" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
+                <InputNumber autocomplete="off" mode="currency" locale="DZ-fr" currency="DZD"  v-model="default_price_vat" disabled :placeholder="$t('rooms.room.price_vat')" /> 
             </div>
 
             <div class="switch-container p-inputgroup flex-1">
@@ -43,7 +43,7 @@
 
             </div>
             
-            <Button severity="success" >Ok</Button>
+            <Button severity="success" :label="$t('buttons.create')" v-on:click="addRoom()" />
             
 
 
@@ -52,6 +52,7 @@
 </template>
 <script>
 import Utility from '../../js/functions'
+
   export default {
     name: "Add Room",
     components: {
@@ -66,7 +67,7 @@ import Utility from '../../js/functions'
         floor_number: null,
         default_price: null,	
         default_price_vat: null,	
-        default_tax: null,
+        default_vat: null,
         number_of_beds: null,	
         number_of_people: null,	
         number_of_babies: null,
@@ -77,13 +78,63 @@ import Utility from '../../js/functions'
     },
     beforeMount() {
       let that = this
-      Utility.getDefferedReq('rooms/types', {}).then( response => that.loadRoomTypes(response) )
+      Utility.getDeferredReq('rooms/types', {}).then( response => that.loadRoomTypes(response) )
     }, 
     methods: { 
       loadRoomTypes(data) {
         this.room_types = data.status == 'success' ? data.room_types : []
+      },
+      addRoom() {
+        let that = this
+        console.log('clicked')
+        let data = {
+          room_number: that.room_number,
+          room_name: that.room_name,
+          room_type: that.room_type,
+          description: that.description,
+          floor_number: that.floor_number,
+          default_price: that.default_price,	
+          default_price_vat: that.default_price_vat,	
+          default_vat: that.default_vat,
+          number_of_beds: that.number_of_beds,	
+          number_of_people: that.number_of_people,	
+          number_of_babies: that.number_of_babies,
+          refundable: that.refundable,
+          usable: that.usable
+        }
+        Utility.postDeferredReq('rooms', data).then(response => {
+            console.log(response)
+          if (response.status == 'success') {
+            if (response.code == 'room_not_added') {
+            
+              that.Utility.Swal.fire({
+                title: that.$t("errors.title"),
+                text: that.$t("errors.rooms.room_not_added"),
+                icon: 'error',
+                confirmButtonText: that.$t("buttons.back")
+              })
 
+            }
+          } else {
+            
+            that.Utility.Swal.fire({
+              title: that.$t("errors.title"),
+              text: that.$t("errors.detected_error"),
+              icon: 'error',
+              confirmButtonText: that.$t("buttons.back")
+            })
+          }
+        });
+      },
+      calculate($e) {
+        console.log($e)
+      },
+      calculateVat() {
+        let vat = this.default_vat
+        let price = this.default_price
+        this.default_price_vat = price * (1 + parseFloat(vat/100)); 
       }
+
     }
   }
 </script>

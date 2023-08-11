@@ -1,4 +1,12 @@
 {
+    "errors": {
+        "detected_error": "Erreur Détectée",
+        "title": "Erreur",
+
+        "rooms": {
+            "room_not_added": "La chambre n'a pas été ajoutée"
+        }
+    },
     "boot": {
         "verify": "Vérifier",
         "login": "Se connecter",

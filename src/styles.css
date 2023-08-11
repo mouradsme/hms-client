@@ -4,7 +4,7 @@
 }
 
 :root {    
-  --topbar-height: 2rem;
+  --topbar-height: 2.5rem;
   --breadcrumbs-height: 2.5rem;
   --main-color: #0f54ef;
   --main-color-hovered: #4f81f5;

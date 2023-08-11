@@ -26,6 +26,7 @@ const API = {
          }, function(err) {
         })
 
-    }
+    }, 
+ 
 }
 export default API

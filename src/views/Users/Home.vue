@@ -37,7 +37,7 @@ import Utility from '../../js/functions'
     },
     beforeMount() {
       let that = this
-      Utility.getDefferedReq('users', {}).then( response => that.loadUsers(response) )
+      Utility.getDeferredReq('users', {}).then( response => that.loadUsers(response) )
     }, 
     methods: {
       loadUsers(data) {

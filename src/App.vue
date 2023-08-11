@@ -17,8 +17,8 @@
         <input v-if="connectionSuccessful" type="text" placeholder="Utilisateur" name="username" id="username" v-model="username" required />
         <input v-if="connectionSuccessful" type="password" placeholder="Mot de passe" name="password" id="password" v-model="password" required />
         <div class="buttons-list">
-          <button class="success" v-on:click="testConnection()" v-if="!connectionSuccessful">{{ $t("boot.verify") }}</button>
-          <button class="primary" v-on:click="login()" v-if="connectionSuccessful">{{ $t("boot.login") }}</button>
+          <button class="success" id="verify" v-on:click="testConnection()" v-if="!connectionSuccessful">{{ $t("boot.verify") }}</button>
+          <button class="primary" id="login" v-on:click="login()" v-if="connectionSuccessful">{{ $t("boot.login") }}</button>
 
         </div>
 
@@ -46,7 +46,8 @@ export default {
       loggedIn: false, // Login Status
       connectionSuccessful: false, // was IP Address Connection successful?
       loginKey: 0,    // A key used to update the login component
-      loggedInKey: 0  // A key used to update the App component
+      loggedInKey: 0,  // A key used to update the App component
+      step: 0
     }
   },
   beforeMount() {
@@ -56,6 +57,14 @@ export default {
     this.loggedIn = localStorage.getItem('loggedIn') ?? false
   },  
   mounted() {
+    let that = this
+    document.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        if (that.step == 0) document.getElementById("verify").click();
+        if (that.step == 1) document.getElementById("login").click();
+      }
+    });
    },
   methods: { 
     userLoggedOut() {
@@ -67,6 +76,7 @@ export default {
     restartConn() {
       localStorage.setItem('ip_address', '');
       this.ip_address = ''
+      this.step = 0
       window.API_URL = this.ip_address
       this.connectionSuccessful = false
       localStorage.setItem('loggedIn', false)
@@ -78,7 +88,7 @@ export default {
       Utility.login(this.username, this.password, function(response) {
         if (response.status == 'success') {
           localStorage.setItem('loggedIn', true)
-          
+          that.step = 1
           localStorage.setItem('User', JSON.stringify(response.data))
           localStorage.setItem('UserAuth', JSON.stringify({ username: that.username, password: that.password}))
            that.loggedIn = true
@@ -87,6 +97,7 @@ export default {
         }  
       }, function(response) {
         
+        that.step = 0
           
         if (response.code == 'wrong_credentials' || response.code == 'no_such_user') {
             Swal.fire({
@@ -120,6 +131,7 @@ export default {
         })
         localStorage.setItem('ip_address', that.ip_address)
         that.connectionSuccessful = true
+        that.step = 1
       }, function() {
         Swal.fire({
           title: that.$t("boot.titles.success"),
@@ -127,6 +139,7 @@ export default {
           icon: 'error',
           confirmButtonText: that.$t("boot.back")
         })
+        that.step = 0
         that.connectionSuccessful = false
 
       });
@@ -180,5 +193,11 @@ button.success {
   height: 2rem;
 }
 
+#restart {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+
+}
 
 </style>

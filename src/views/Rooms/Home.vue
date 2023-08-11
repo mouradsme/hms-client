@@ -71,7 +71,7 @@ import Utility from '../../js/functions'
     },
     beforeMount() {
       let that = this
-      Utility.getDefferedReq('rooms', {}).then( response => that.loadRooms(response) )
+      Utility.getDeferredReq('rooms', {}).then( response => that.loadRooms(response) )
       
     }, 
     methods: {

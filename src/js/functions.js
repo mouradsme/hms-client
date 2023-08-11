@@ -1,5 +1,7 @@
 import $ from 'jquery'
+import Swal from 'sweetalert2'
 var Utility = { 
+    Swal: Swal,
     csrfConn() {
         let csrfToken = Address + "csrf"
 
@@ -52,7 +54,7 @@ var Utility = {
             }
         });
     },
-    getDefferedReq(endpoint, data) {
+    getDeferredReq(endpoint, data) {
         var defer = $.Deferred(); 
         let UserAuth = JSON.parse(window.localStorage.UserAuth)
         $.ajax({
@@ -89,6 +91,28 @@ var Utility = {
                 callbackFailure(response)
             }
         });
+
+    },
+    postDeferredReq(endpoint, data) {
+        let defer = $.Deferred()
+        let UserAuth = JSON.parse(window.localStorage.UserAuth) 
+
+        var settings = {
+            "url": window.API_URL + endpoint + "?auth_username=" + UserAuth.username + "&auth_password=" + UserAuth.password,
+            "method": "POST",
+            "data": data,
+            "timeout": 0,
+            "headers": {
+             },
+          };
+          
+          $.ajax(settings).done(function (response) {
+            if (response.status == 'success')
+                defer.resolve(response)
+            else
+            defer.reject(response)
+          });      
+          return defer.promise()
 
     },
     postReq(endpoint, data, callbackSuccess, callbackFailure) {
