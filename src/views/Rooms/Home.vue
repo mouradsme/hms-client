@@ -75,9 +75,10 @@ import Utility from '../../js/functions'
       
     }, 
     methods: {
-        loadRooms() {
+        loadRooms(data) {
+          this.$emit('DataFetched')
         this.rooms = data.status == 'success' ? data.rooms : []
-        this.loading = false
+         this.loading = false
 
       }
     }

@@ -25,6 +25,12 @@ const menuItems = [
         path: '/rooms',
         show: User?.role <= 0
     },
+    {
+        name: 'types',
+        icon: ['fa', 'dashboard'],
+        path: '/rooms/types',
+        show: User?.role <= 1
+    },
 
 ]
 

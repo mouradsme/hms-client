@@ -96,7 +96,6 @@ var Utility = {
     postDeferredReq(endpoint, data) {
         let defer = $.Deferred()
         let UserAuth = JSON.parse(window.localStorage.UserAuth) 
-
         var settings = {
             "url": window.API_URL + endpoint + "?auth_username=" + UserAuth.username + "&auth_password=" + UserAuth.password,
             "method": "POST",
@@ -107,11 +106,12 @@ var Utility = {
           };
           
           $.ajax(settings).done(function (response) {
+            console.log(response)
             if (response.status == 'success')
                 defer.resolve(response)
             else
             defer.reject(response)
-          });      
+          })    
           return defer.promise()
 
     },

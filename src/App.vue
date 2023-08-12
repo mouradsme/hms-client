@@ -4,6 +4,11 @@
     <siine-topbar  @loggedOut="userLoggedOut()"  v-else/>
     <siine-breadcrumbs :route="$route.name"/> 
     
+    <div class="loader-container">
+        <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--main-color)"
+            animationDuration=".5s" @DataFetched="loaded()" v-if="loading" />
+    </div>
+    
     <router-view>
     </router-view>
   </div>
@@ -47,7 +52,8 @@ export default {
       connectionSuccessful: false, // was IP Address Connection successful?
       loginKey: 0,    // A key used to update the login component
       loggedInKey: 0,  // A key used to update the App component
-      step: 0
+      step: 0,
+      loading: true
     }
   },
   beforeMount() {
@@ -58,6 +64,7 @@ export default {
   },  
   mounted() {
     let that = this
+    if (!this.loggedIn)
     document.addEventListener("keypress", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
@@ -67,6 +74,9 @@ export default {
     });
    },
   methods: { 
+    loaded() {
+      this.loading = false
+    },
     userLoggedOut() {
           localStorage.setItem('loggedIn', false)
           this.loggedIn = false

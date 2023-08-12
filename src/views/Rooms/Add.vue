@@ -21,10 +21,10 @@
                 <InputNumber autocomplete="off"  v-model="number_of_babies" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_babies')" /> 
             </div> 
             <div class="p-inputgroup flex-1">
-                <InputNumber autocomplete="off" @keyup="calculate($e)" @input="calculateVat()" mode="currency" locale="DZ-fr" currency="DZD"  :min="0" v-model="default_price" :placeholder="$t('rooms.room.price')" /> 
-                <InputNumber autocomplete="off" @keyup="calculate($e)" @input="calculateVat()" :min="0" :max="100"  v-model="default_vat" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
-                <InputNumber autocomplete="off" mode="currency" locale="DZ-fr" currency="DZD"  v-model="default_price_vat" disabled :placeholder="$t('rooms.room.price_vat')" /> 
-            </div>
+                <InputNumber autocomplete="off" @input="calculateVat()" mode="currency" currency="DZD"  :min="0" v-model="default_price" :placeholder="$t('rooms.room.price')" /> 
+                <InputNumber autocomplete="off" @input="calculateVat()" :min="0" :max="100"  v-model="default_vat" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
+                <InputNumber mode="currency" currency="DZD" :key="forceupdateDefaultPriceVat" v-model="default_price_vat" readonly  :placeholder="$t('rooms.room.price_vat')" /> 
+              </div>
 
             <div class="switch-container p-inputgroup flex-1">
               <div class="switch">
@@ -72,7 +72,8 @@ import Utility from '../../js/functions'
         number_of_people: null,	
         number_of_babies: null,
         refundable: true,
-        usable: true
+        usable: true,
+        forceupdateDefaultPriceVat: 0
           
        }
     },
@@ -86,7 +87,6 @@ import Utility from '../../js/functions'
       },
       addRoom() {
         let that = this
-        console.log('clicked')
         let data = {
           room_number: that.room_number,
           room_name: that.room_name,
@@ -101,10 +101,19 @@ import Utility from '../../js/functions'
           number_of_babies: that.number_of_babies,
           refundable: that.refundable,
           usable: that.usable
-        }
+        } 
         Utility.postDeferredReq('rooms', data).then(response => {
-            console.log(response)
           if (response.status == 'success') {
+
+            if (response.code == 'rom_added') {
+              that.Utility.Swal.fire({
+                title: that.$t("success.title"),
+                text: that.$t("success.rooms.room_added"),
+                icon: 'success',
+                confirmButtonText: that.$t("buttons.ok")
+              })
+
+            }
             if (response.code == 'room_not_added') {
             
               that.Utility.Swal.fire({
@@ -124,15 +133,14 @@ import Utility from '../../js/functions'
               confirmButtonText: that.$t("buttons.back")
             })
           }
-        });
-      },
-      calculate($e) {
-        console.log($e)
-      },
+        })
+      }, 
       calculateVat() {
         let vat = this.default_vat
         let price = this.default_price
-        this.default_price_vat = price * (1 + parseFloat(vat/100)); 
+        this.default_price_vat = parseFloat(price * (1 + parseFloat(vat/100))); 
+        this.forceupdateDefaultPriceVat = (new Date()).getTime()
+        this.$forceUpdate()
       }
 
     }

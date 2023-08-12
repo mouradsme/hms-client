@@ -2,20 +2,24 @@
 
     <div class="view-container"> 
         <siine-viewcontrols :routes='[
-          { route: "/users/add", class: "add", title: this.$t("buttons.create"), icon: "plus"}
+          { route: "/roomtypes/add", class: "add", title: this.$t("buttons.create"), icon: "plus"}
         ]'/>
         
         <DataTable :value="users" tableStyle="min-width: 50rem">
-          <Column field="id" :header="$t('users.user.id')"></Column>
-          <Column field="name" :header="$t('users.user.name')"></Column>
-          <Column field="username" :header="$t('users.user.username')"></Column>
-          <Column field="role" :header="$t('users.user.role')">
+          <Column field="id" :header="$t('roomtypes.user.id')"></Column>
+          <Column field="name" :header="$t('roomtypes.user.name')"></Column>
+          <Column field="username" :header="$t('roomtypes.user.username')"></Column>
+          <Column field="role" :header="$t('roomtypes.user.role')">
             <template #body="slotProps">
                 {{ $t("users.user.role_" + slotProps.data.role) }}
             </template> 
           </Column>
      
-      </DataTable>       
+      </DataTable>      
+          <div class="loader-container">
+              <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--main-color)"
+                  animationDuration=".5s" v-if="loading" />
+          </div>
       
       </div>
 </template>

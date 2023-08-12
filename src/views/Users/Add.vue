@@ -53,10 +53,6 @@
             <div class="buttons">
               <Button v-on:click="addUser()" severity="success" >{{ $t('buttons.create')  }}</Button>
             </div>  
-            <div class="loader-container">
-                <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--main-color)"
-                    animationDuration=".5s" v-if="loading" />
-            </div>
 
 
         </div>
