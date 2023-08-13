@@ -43,10 +43,4 @@ import Utility from '../../js/functions'
     }
   }
 </script>
-
-<style >
-.loader-container {
-  width: 100%;
-  text-align: center;
-}
-</style>
+ 

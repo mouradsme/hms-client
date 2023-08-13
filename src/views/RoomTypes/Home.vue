@@ -2,24 +2,24 @@
 
     <div class="view-container"> 
         <siine-viewcontrols :routes='[
-          { route: "/roomtypes/add", class: "add", title: this.$t("buttons.create"), icon: "plus"}
+          { route: "/rooms/type/add", class: "add", title: this.$t("buttons.create"), icon: "plus"}
         ]'/>
         
-        <DataTable :value="users" tableStyle="min-width: 50rem">
-          <Column field="id" :header="$t('roomtypes.user.id')"></Column>
-          <Column field="name" :header="$t('roomtypes.user.name')"></Column>
-          <Column field="username" :header="$t('roomtypes.user.username')"></Column>
-          <Column field="role" :header="$t('roomtypes.user.role')">
+        <DataTable :value="types" tableStyle="min-width: 50rem">
+          <Column field="id" :header="$t('types.type.id')"></Column>
+          <Column field="name" :header="$t('types.type.name')"></Column>
+          <Column field="default_number_of_beds" :header="$t('types.type.n_beds')"></Column>
+          <Column field="default_number_of_people" :header="$t('types.type.n_people')"></Column>
+          <Column field="default_number_of_babies" :header="$t('types.type.n_babies')"></Column>
+          <Column field="default_refundable" :header="$t('types.type.refundable')">
             <template #body="slotProps">
-                {{ $t("users.user.role_" + slotProps.data.role) }}
+                {{ $t("types.isrefundable." + slotProps.data.default_refundable) }}
             </template> 
           </Column>
+ 
+    
      
-      </DataTable>      
-          <div class="loader-container">
-              <ProgressSpinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--main-color)"
-                  animationDuration=".5s" v-if="loading" />
-          </div>
+      </DataTable>       
       
       </div>
 </template>
@@ -32,25 +32,20 @@ import Utility from '../../js/functions'
     data () {
        return { 
         loading: true,
-        users: [],
+        types: [],
       }
     },
     beforeMount() {
       let that = this
-      Utility.getDeferredReq('users', {}).then( response => that.loadUsers(response) )
+      Utility.getDeferredReq('rooms/types', {}).then( response => that.loadRoomTypes(response) )
     }, 
     methods: {
-      loadUsers(data) {
-        this.users = data.status == 'success' ? data.users : []
+      loadRoomTypes(data) {
+        console.log(data)
+        this.types = data.status == 'success' ? data.room_types : []
         this.loading = false
       } 
     }
   }
 </script>
-
-<style >
-.loader-container {
-  width: 100%;
-  text-align: center;
-}
-</style>
+ 

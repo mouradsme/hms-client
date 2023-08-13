@@ -21,7 +21,7 @@
                               <div class="flex align-items-center gap-3">
                                   <span class="flex align-items-center gap-2">
                                       <i class="pi pi-tag"></i>
-                                      <span class="font-semibold">{{ slotProps.data.username }}</span>
+                                      <span class="font-semibold">{{  slotProps.data.default_price + ' ' + currency.symbol }}</span>
                                   </span>
                                </div>
                           </div>
@@ -58,15 +58,18 @@
 
 <script>
 import Utility from '../../js/functions'
+import {currency} from '../../configs/currency'
   export default {
     name: "Rooms",
+    emits: ['DataFetched'],
     components: {
     },
     data () {
       return { 
         loading: true,
         rooms: [],
-        layout: 'grid'
+        layout: 'grid',
+        currency
       }
     },
     beforeMount() {
@@ -76,18 +79,12 @@ import Utility from '../../js/functions'
     }, 
     methods: {
         loadRooms(data) {
+          console.log('loading')
+          this.rooms = data.status == 'success' ? data.rooms : []
           this.$emit('DataFetched')
-        this.rooms = data.status == 'success' ? data.rooms : []
-         this.loading = false
+          this.loading = false
 
       }
     }
   }
 </script>
-
-<style >
-.loader-container {
-  width: 100%;
-  text-align: center;
-}
-</style>

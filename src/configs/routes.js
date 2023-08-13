@@ -6,6 +6,9 @@ import BookingsHome from '../views/Bookings/Home.vue'
 import RoomsHome from '../views/Rooms/Home.vue'
 import AddRoom from '../views/Rooms/Add.vue'
 
+import RoomTypesHome from '../views/RoomTypes/Home.vue'
+import AddRoomTypes from '../views/RoomTypes/Add.vue'
+
 import UsersHome from '../views/Users/Home.vue'
 import AddUser from '../views/Users/Add.vue'
 function adminOnly(to, from, next)
@@ -47,6 +50,22 @@ const routes = [
         beforeEnter : adminOnly,
  
     },
+    { 
+        path: '/rooms/types', 
+        component: RoomTypesHome, 
+        name: "types",
+        beforeEnter : adminOnly,
+ 
+    },
+    { 
+        path: '/rooms/type/add', 
+        component: AddRoomTypes, 
+        name: "types_add",
+        beforeEnter : adminOnly,
+ 
+    },
+
+    
     { 
         path: '/users', 
         component: UsersHome, 

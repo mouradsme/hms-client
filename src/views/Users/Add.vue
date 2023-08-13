@@ -118,9 +118,5 @@ import Utility from '../../js/functions'
   background-color:var(--white-color) ;
   cursor: pointer;
 }
-
-.loader-container {
-  width: 100%;
-  text-align: center;
-}
+ 
 </style>

@@ -14,15 +14,6 @@
             "room_added": "La chambre a pas été ajoutée"
         }
     },
-    "types": {
-        "type": {
-            "name": "Designation",
-            "n_beds": "Nombre de lits",
-            "n_people": "Nombre de personnes",
-            "n_babies": "Nombre de bébés",
-            "refundable": "Remboursable"
-        }
-    },
     "boot": {
         "verify": "Vérifier",
         "login": "Se connecter",
@@ -50,6 +41,9 @@
     "rooms_add": {
         "title": "Chambres > Ajouter"
     },
+    "types_add": {
+        "title": "Types de chambre > Ajouter" 
+    },
     "users_add": {
         "title": "Utilisateurs > Ajouter"
     },
@@ -58,6 +52,21 @@
         "normal": "Utilisateur",
         "other": "Autre"
     }, 
+    "types": {
+        "title": "Types de chambre",
+        "type": {
+            "id": "#",
+            "name": "Designation",
+            "n_beds": "Nombre de lits",
+            "n_people": "Nombre de personnes",
+            "n_babies": "Nombre de bébés",
+            "refundable": "Remboursable"
+        },
+        "isrefundable": { 
+            "false": "Non-remboursable", 
+            "true": "Remboursable" 
+        }
+    },
     "users": {
         "title": "Utilisateurs",
         "password": {
