@@ -103,10 +103,10 @@ import Utility from '../../js/functions'
           usable: that.usable
         } 
         Utility.postDeferredReq('rooms', data).then(response => {
-          if (response.status == 'success') {
+           if (response.status == 'success') {
 
-            if (response.code == 'rom_added') {
-              that.Utility.Swal.fire({
+            if (response.code == 'room_added') {
+              Utility.Swal.fire({
                 title: that.$t("success.title"),
                 text: that.$t("success.rooms.room_added"),
                 icon: 'success',
@@ -116,7 +116,7 @@ import Utility from '../../js/functions'
             }
             if (response.code == 'room_not_added') {
             
-              that.Utility.Swal.fire({
+              Utility.Swal.fire({
                 title: that.$t("errors.title"),
                 text: that.$t("errors.rooms.room_not_added"),
                 icon: 'error',
@@ -126,7 +126,7 @@ import Utility from '../../js/functions'
             }
           } else {
             
-            that.Utility.Swal.fire({
+            Utility.Swal.fire({
               title: that.$t("errors.title"),
               text: that.$t("errors.detected_error"),
               icon: 'error',

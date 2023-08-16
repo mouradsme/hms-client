@@ -29,6 +29,12 @@ const menuItems = [
         show: User?.role <= 0
     },
     {
+        name: 'clients',
+        icon: ['fa', 'users'],
+        path: '/clients',
+        show: User?.role <= 0
+    },
+    {
         name: 'rooms',
         icon: ['fa', 'bed'],
         path: '/rooms',

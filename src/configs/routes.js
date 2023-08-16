@@ -11,6 +11,9 @@ import AddRoomTypes from '../views/RoomTypes/Add.vue'
 
 import UsersHome from '../views/Users/Home.vue'
 import AddUser from '../views/Users/Add.vue'
+
+import ClientsHome from '../views/Clients/Home.vue'
+import AddClient from '../views/Clients/Add.vue'
 function adminOnly(to, from, next)
 {
  let User       = JSON.parse(localStorage.getItem('User'))
@@ -61,6 +64,20 @@ const routes = [
         path: '/rooms/type/add', 
         component: AddRoomTypes, 
         name: "types_add",
+        beforeEnter : adminOnly,
+ 
+    },
+    { 
+        path: '/clients', 
+        component: ClientsHome, 
+        name: "clients",
+        beforeEnter : adminOnly,
+ 
+    },
+    { 
+        path: '/clients/add', 
+        component: AddClient, 
+        name: "clients_add",
         beforeEnter : adminOnly,
  
     },

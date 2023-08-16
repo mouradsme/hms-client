@@ -4,7 +4,8 @@
 
                 <template v-for="menuItem in menuItems" :key="menuItem">
                     <router-link v-if="menuItem.show"  :to="menuItem.path" class="sidebar-item" :title="$t(menuItem.name + '.title')">
-                        <font-awesome-icon :icon="menuItem.icon"  />
+                        <!-- <font-awesome-icon :icon="menuItem.icon"  /> -->
+                        {{ $t(menuItem.name + ".title") }}
                     </router-link> 
                 </template>
 
@@ -64,7 +65,7 @@ export default {
 }
 #main-topbar .sidebar-items .sidebar-item {
     color: var(--white-color);
-    font-size: calc(var(--topbar-height) * 0.75);
+    font-size: calc(var(--topbar-height) * 0.4);
 }
 #logout {
     all: unset;

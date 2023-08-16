@@ -20,7 +20,8 @@
     
      
       </DataTable>       
-      
+      <siine-loading v-if="loading" />
+
       </div>
 </template>
 <script> 

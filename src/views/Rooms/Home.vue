@@ -12,7 +12,7 @@
               </div>
           </template>
 
-          <template #list="slotProps">
+          <template #list="slotProps" >
               <div class="col-12">
                   <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
                       <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -21,12 +21,17 @@
                               <div class="flex align-items-center gap-3">
                                   <span class="flex align-items-center gap-2">
                                       <i class="pi pi-tag"></i>
-                                      <span class="font-semibold">{{  slotProps.data.default_price + ' ' + currency.symbol }}</span>
+                                      <span class="font-semibold">{{  slotProps.data.room_type_name }}</span>
                                   </span>
-                               </div>
+                               </div> 
+                          </div>
+                          <div :vars="GUEST = JSON.parse(slotProps.data.guest_data)">
+                            <div v-if="GUEST?.name">
+                             {{ $t('rooms.room.currently_in_use')  }}
+                            </div>
                           </div>
                           <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                              <span class="text-2xl font-semibold">${{ slotProps.data.id }}</span>
+                              <span class="text-2xl font-semibold">{{ slotProps.data.default_price_vat + ' ' + currency.symbol }}</span>
                           </div>
                       </div>
                   </div>
@@ -35,7 +40,7 @@
 
           
     <template #grid="slotProps">
-        <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2">
+        <div class="col-12 sm:col-6 lg:col-6 xl:col-4 p-2">
             <div class="p-4 border-1 surface-border surface-card border-round">
                 <div class="flex flex-wrap align-items-center justify-content-between gap-2">
                     <div class="flex align-items-center gap-2">
@@ -47,13 +52,15 @@
                     <div class="text-2xl font-bold">{{ slotProps.data.name }}</div>
                 </div>
                 <div class="flex align-items-center justify-content-between">
-                    <span class="text-2xl font-semibold">${{ slotProps.data.role }}</span>
+                    <span class="text-2xl font-semibold">{{ slotProps.data.default_price_vat + ' ' + currency.symbol }}</span>
                 </div>
             </div>
         </div>
     </template>
       </DataView>
+      <siine-loading v-if="loading" />
   </div>
+
 </template>
 
 <script>

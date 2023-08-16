@@ -1,4 +1,13 @@
 {
+    "tooltips": {
+        "clients": {
+            "type_label": "Le type du client que vous allez ajouter. Il en existe deux types (Individuel et Entreprise). ",
+            "type_individual": "Un client individuel est une personne physique.",
+            "type_enterprise": "Un client entreprise est une personne morale.",
+            "is_db_full": "Si le client ne possède pas une date de naissance complète, désactivez cette option."
+       
+        }
+    },
     "errors": {
         "detected_error": "Erreur Détectée",
         "title": "Erreur",
@@ -86,6 +95,44 @@
             "role_1": "Utilisateur Simple"
         }
     },
+    "clients_add": {
+        "title": "Clients > Ajouter"
+    },
+    "clients": {
+        "title": "Clients",
+        "types": {
+            "individual": "Individuel",
+            "enterprise": "Entreprise"
+        },
+        "cards": {
+            "id": "Carte d'identité nationale",
+            "passport": "Passeport",
+            "other": "Autre",
+            "authority": "Autorité",
+            "issue_date": "Date d'émission",
+            "expiry_date": "Date d'expiration",
+            "id_number": "Numero d'identification nationale"
+        },
+        "client": {
+            "id": "#",
+            "fullname": "Nom complet",
+            "first_name": "Prénom",
+            "last_name": "Nom",
+            "middle_name": "Autres prénoms",
+            "phone": "Téléphone",
+            "email": "Email",
+            "is_db_full": "Date de naissance complete?",
+            "dob": "Date de naissance",
+            "yob": "Année de naissance",
+            "pob": "Né(e) à ",
+            "gender": "Sexe",
+            "gender_m":"Homme",
+            "gender_f":"Femme",
+            "rh": "Rh",
+            "type": "Type"
+            
+        }
+    },
     "rooms": {
         "title": "Chambres",
         "room": {
@@ -101,7 +148,8 @@
             "n_people": "Nombre de personnes",
             "n_babies": "Nombre de bébés",
             "refundable": "Remboursable",
-            "usable": "Utilisable"
+            "usable": "Utilisable",
+            "currently_in_use": "Occupée"
 
 
         }
