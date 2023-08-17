@@ -10,60 +10,38 @@
             <div class="radios"> 
 
                 <label  v-tooltip.top="$t('tooltips.clients.type_individual')"  for="individual" class="radio-item">
-                    <RadioButton v-model="client_type" inputId="individual" name="client_type" value="0" selected="true" />
+                    <RadioButton v-model="client_type" inputId="0" id="individual" value="individual"   />
                     <span>{{ $t('clients.types.individual') }}</span>
                 </label>  
                 <label  v-tooltip.top="$t('tooltips.clients.type_enterprise')"  for="enterprise" class="radio-item">
-                    <RadioButton v-model="client_type" inputId="enterprise" name="client_type" value="1" />
+                    <RadioButton v-model="client_type" inputId="1" id="enterprise" value="enterprise" />
                     <span>{{ $t('clients.types.enterprise') }}</span>
                 </label>
                 
             </div>
           <hr> 
             </div>
-            <siine-client-form-individual v-if="client_type == 0"/>
+            <siine-client-form-individual v-if="client_type == null || client_type == 'individual'"/>
+            <siine-client-form-enterprise v-else/>
             
       </div>
 </template>
 <script>
-import Utility from '../../js/functions'
+import { ref } from 'vue'
+
   export default {
     name: "Add Client",
     components: {
     },
     data () {
       return { 
-        first_name: '',
-        last_name: '',
-        middle_name: '',
-        client_type: 0,
-        is_db_full: true,
-        dob: null,
-        yob: null,
-        
-        loading: false,
+        client_type: 0
        }
     },
     mounted() {
+      this.client_type = ref('individual')
      }, 
     methods: {
-      addClient() {
-        let that = this
-        let data = {
-          name: that.user_name,
-          username: that.user_username,
-          password: that.user_password,
-          confirm: that.user_password_confirmation,
-          type: that.client_type
-        } 
-        this.loading = true
-        Utility.postReq('users', data, function(response) {
-          that.loading = false
-         }, function(err) {
-          that.loading = false
-        })
-
-      }
     }
   }
 </script>

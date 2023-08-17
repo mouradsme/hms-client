@@ -94,7 +94,6 @@ export default {
       }
       console.log('POST started: ')
       Utility.postDeferredReq('rooms', data).then(response => {
-          console.log(response)
         if (response.status == 'success') {
           if (response.code == 'room_not_added') {
           

@@ -69,8 +69,8 @@ export default {
   },
   beforeMount() {
     let that = this
-    let id = this.$router.
-    Utility.getDeferredReq('rooms/types/info', {id: }).then( response => that.loadRoomTypes(response) )
+    
+    //Utility.getDeferredReq('rooms/types/info', {id:id }).then( response => that.loadRoomTypes(response) )
     Utility.getDeferredReq('rooms/types', {}).then( response => that.loadRoomTypes(response) )
   }, 
   methods: { 

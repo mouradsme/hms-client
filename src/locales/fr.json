@@ -14,13 +14,16 @@
 
         "rooms": {
             "room_not_added": "La chambre n'a pas été ajoutée"
+        },
+        "clients": {
+            "client_not_added": "Le client n'a pas été ajoutée"
         }
     },
     "success": {
         "title": "Ca marche!",
 
         "rooms": {
-            "room_added": "La chambre a pas été ajoutée"
+            "room_added": "La chambre a été ajoutée"
         }
     },
     "boot": {
@@ -111,7 +114,28 @@
             "authority": "Autorité",
             "issue_date": "Date d'émission",
             "expiry_date": "Date d'expiration",
-            "id_number": "Numero d'identification nationale"
+            "id_number": "Numero d'identification nationale",
+            "id_card_number": "Numero de la pièce d'identité",
+            "nationality": "Nationalité",
+            "pp_number": "Numéro du Passeport"
+        },
+        "company": {
+            "designation": "Nom de la société",
+            "social_cap": "Capital Social",
+            "rib": "RIB",
+            "rib_full": "",
+            "nai": "NAI",
+            "nai_full": "",
+            "nis": "NIS",
+            "nis_full": "Numéro d'identification sociale",
+            "nif": "NIF",
+            "nif_full": "Numéro d'identification fiscale",
+            "nrc": "NRC",
+            "nrc_full": "Numéro de ",
+            "bank_accounts": "Comptes bancaires",
+            "bank_name": "Nom de la banque",
+            "bank_account_number": "Numéro du compte bancaire"
+            
         },
         "client": {
             "id": "#",
@@ -119,16 +143,21 @@
             "first_name": "Prénom",
             "last_name": "Nom",
             "middle_name": "Autres prénoms",
+            "fullname_arabic": "Nom complet en arabe",
+            "first_name_arabic": "Prénom en arabe",
+            "last_name_arabic": "Nom en arabe",
+            "middle_name_arabic": "Autres prénoms en arabe",
             "phone": "Téléphone",
             "email": "Email",
             "is_db_full": "Date de naissance complete?",
             "dob": "Date de naissance",
             "yob": "Année de naissance",
-            "pob": "Né(e) à ",
+            "pob": "Lieu de naissance",
             "gender": "Sexe",
             "gender_m":"Homme",
             "gender_f":"Femme",
             "rh": "Rh",
+            "select_rh": "Sélectionner le RH",
             "type": "Type"
             
         }

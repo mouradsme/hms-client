@@ -1,102 +1,115 @@
 <template> 
-    <div class="form" >
-        <div class="p-inputgroup flex-1">
-            <span class="p-inputgroup-addon">
-                <font-awesome-icon :icon="['fa', 'user']" />
-            </span>
-            <InputText  v-model="last_name" :placeholder="$t('clients.client.last_name')" />
-            <InputText v-model="first_name" :placeholder="$t('clients.client.first_name')" />
-            <InputText v-model="middle_name" :placeholder="$t('clients.client.middle_name')" />
-        </div>
-        <div class="p-inputgroup flex-1">
-            <span v-tooltip.top="$t('tooltips.clients.is_db_full')" class="p-inputgroup-addon" style="gap: 10px">
-              {{ $t('clients.client.is_db_full')  }}
-            <InputSwitch v-tooltip.top="$t('tooltips.clients.is_db_full')" v-model="is_db_full" />
-            </span> 
-            <Calendar v-if="is_db_full" v-model="dob" :placeholder="$t('clients.client.dob')" showIcon  />
-            <Calendar v-else v-model="yob" :placeholder="$t('clients.client.yob')" view="year" :dateFormat="'yy'" showIcon  />
+  <div class="form" >
+      <div class="p-inputgroup flex-1">
+          <span class="p-inputgroup-addon">
+              <font-awesome-icon :icon="['fa', 'user']" />
+          </span>
+          <InputText v-model="designation" :placeholder="$t('clients.company.designation')" />
+      </div>
+      <div class="p-inputgroup flex-1">
+          <span class="p-inputgroup-addon">
+              <font-awesome-icon :icon="['fa', 'hashtag']" />
+          </span>
+          <InputText v-tooltip.top="$t('clients.company.rib_full')" v-model="rib" :placeholder="$t('clients.company.rib')" />
+          <InputText v-tooltip.top="$t('clients.company.nif_full')" v-model="nif" :placeholder="$t('clients.company.nif')" />
+      </div>
+      <div class="p-inputgroup flex-1">
+          <span class="p-inputgroup-addon">
+              <font-awesome-icon :icon="['fa', 'hashtag']" />
+          </span>
+          <InputText v-tooltip.top="$t('clients.company.nis_full')" v-model="nis" :placeholder="$t('clients.company.nis')" />
+          <InputText v-tooltip.top="$t('clients.company.nrc_full')" v-model="nrc" :placeholder="$t('clients.company.nrc')" />
+      </div>
+      <div class="p-inputgroup flex-1">
+          <span class="p-inputgroup-addon">
+              <font-awesome-icon :icon="['fa', 'hashtag']" />
+          </span>
+          <InputText v-tooltip.top="$t('clients.company.nai_full')" v-model="nai" :placeholder="$t('clients.company.nai')" />
+          <InputText v-model="social_cap" :placeholder="$t('clients.company.social_cap')" />
 
-          </div>
-
-
+      </div>
         
-        <div class="p-inputgroup flex-1">
-            <label for="phone" class="p-inputgroup-addon">
-                <font-awesome-icon :icon="['fa', 'phone']" />
-            </label>
-            <InputText id="phone" v-model="phone" :placeholder="$t('clients.client.phone')" />
-            <label for="email" class="p-inputgroup-addon">
-                <font-awesome-icon :icon="['fa', 'envelope']" />
-            </label>
-            <InputText id="email" v-model="email" :placeholder="$t('clients.client.email')" />
+      <div class="p-inputgroup flex-1">
+          <span class="p-inputgroup-addon">
+              <font-awesome-icon :icon="['fa', 'money-bill']" />
+          </span>
+          <InputText v-tooltip.top="$t('clients.company.bank_name')" v-model="bank_name" :placeholder="$t('clients.company.bank_name')" />
+          <InputText v-model="bank_account_number" :placeholder="$t('clients.company.bank_account_number')" />
 
-        </div>
+      </div>
+        
         
 
-
-        <TabView>
-            <TabPanel :header="$t('clients.cards.id')">
-              <div class="p-inputgroup flex-1">
-                  <label for="authority" class="p-inputgroup-addon">
-                   </label>
-                  <InputText id="phone" v-model="phone" :placeholder="$t('clients.client.phone')" />
-                  <label for="email" class="p-inputgroup-addon">
-                      <font-awesome-icon :icon="['fa', 'envelope']" />
-                  </label>
-                  <InputText id="email" v-model="email" :placeholder="$t('clients.client.email')" />
-
-              </div>
-              
-            </TabPanel>
-            <TabPanel :header="$t('clients.cards.passport')">
-            </TabPanel>
-            <TabPanel :header="$t('clients.cards.other')">
-            </TabPanel>
-        </TabView>
-        <div class="buttons">
-          <Button v-on:click="addClient()" severity="success" >{{ $t('buttons.create')  }}</Button>
-        </div>  
+      <div class="buttons">
+        <Button v-on:click="addClient()" severity="success" >{{ $t('buttons.create')  }}</Button>
+      </div>  
 
 
-    </div> 
+  </div> 
 </template>
 <script>
 import Utility from '../../js/functions'
 export default { 
-    name: "Enterprise-Form",
+name: "enterprise-Form",
 data () {
-  return { 
-    first_name: '',
-    last_name: '',
-    middle_name: '',
-    client_type: 0,
-    is_db_full: true,
-    dob: null,
-    yob: null,
-    
-    loading: false,
-   }
+return { 
+  designation: null,
+  rib: null,
+  nis: null,
+  nif: null,
+  nai: null,
+  nrc: null,
+  bank_name: null,
+  bank_account_number: null,
+  social_cap: null,
+  loading: false,
+ }
 },
 mounted() {
- }, 
+}, 
 methods: {
-  addClient() {
-    let that = this
-    let data = {
-      name: that.user_name,
-      username: that.user_username,
-      password: that.user_password,
-      confirm: that.user_password_confirmation,
-      type: that.client_type
-    } 
-    this.loading = true
-    Utility.postReq('users', data, function(response) {
-      that.loading = false
-     }, function(err) {
-      that.loading = false
-    })
+addClient() {
+  let that = this
+  let data = {
+    designation: that.designation,
+    rib: that.rib,
+    nis: that.nis,
+    nif: that.nif,
+    nai: that.nai,
+    nrc: that.nrc,
+    bank_name: that.bank_name,
+    bank_account_number: that.bank_account_number,
+    social_cap: that.social_cap
+  } 
+  this.loading = true
+  Utility.postDeferredReq('clients/enterprise', data).then(response => {
+        if (response.status == 'success') {
+          if (response.code == 'client_added') {
+            window.location.href = '/clients'
+          }
+          if (response.code == 'client_not_added') {
+          
+            that.Utility.Swal.fire({
+              title: that.$t("errors.title"),
+              text: that.$t("errors.clients.client_not_added"),
+              icon: 'error',
+              confirmButtonText: that.$t("buttons.back")
+            })
 
-  }
+          }
+        } else {
+          
+          that.Utility.Swal.fire({
+            title: that.$t("errors.title"),
+            text: that.$t("errors.detected_error"),
+            icon: 'error',
+            confirmButtonText: that.$t("buttons.back")
+          })
+        }
+      })
+
+
+}
 }
 }
 </script>
