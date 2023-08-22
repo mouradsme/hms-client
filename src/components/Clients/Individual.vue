@@ -96,8 +96,7 @@
 
                   </div>
                 </TabPanel>
-                <TabPanel :header="$t('clients.cards.other')">
-                </TabPanel>
+                
             </TabView>
             <div class="buttons">
               <Button v-on:click="addClient()" severity="success" >{{ $t('buttons.create')  }}</Button>
