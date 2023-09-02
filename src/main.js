@@ -9,8 +9,8 @@ import { loadComponents } from './configs/components';
 
 /* Styles imports  */
 // import "primevue/resources/themes/lara-light-indigo/theme.css";
-// bootstrap / material / soho
-import "./assets/themes/soho-light.css";
+// bootstrap /  material / soho
+import "./assets/themes/bootstrap-light.css";
 import 'primeflex/primeflex.css';
 import "./styles.css";
 

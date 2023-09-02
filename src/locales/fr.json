@@ -1,4 +1,19 @@
 {
+    "calendar": {
+        "months": [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Nevembre",
+            "Décembre"
+        ]},
     "tooltips": {
         "clients": {
             "type_label": "Le type du client que vous allez ajouter. Il en existe deux types (Individuel et Entreprise). ",
@@ -49,6 +64,9 @@
     "dashboard": {
         "title": "Tableau de bord",
         "room_stats": "Statistiques des Chambres"
+    },
+    "bookings_add": {
+        "title": "Réservations > Ajouter"
     },
     "rooms_add": {
         "title": "Chambres > Ajouter"

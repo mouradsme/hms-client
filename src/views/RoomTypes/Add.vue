@@ -92,7 +92,6 @@ export default {
         refundable: that.refundable,
         usable: that.usable
       }
-      console.log('POST started: ')
       Utility.postDeferredReq('rooms', data).then(response => {
         if (response.status == 'success') {
           if (response.code == 'room_not_added') {

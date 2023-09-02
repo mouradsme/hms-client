@@ -106,7 +106,6 @@ var Utility = {
           };
           
           $.ajax(settings).done(function (response) {
-            console.log(response)
             if (response.status == 'success')
                 defer.resolve(response)
             else
@@ -135,6 +134,20 @@ var Utility = {
             callbackFailure(response)
           });       
 
+    },
+    
+    getDatesBetween(startDate, endDate) {
+        const currentDate = new Date(startDate.getTime());
+        const dates = [];
+        while (currentDate <= endDate) {
+          dates.push(new Date(currentDate));
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+        return dates;
+    },
+
+    cutString(str, len) {
+        return str.substring(0, len)
     }
 
 }

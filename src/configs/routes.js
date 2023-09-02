@@ -2,6 +2,7 @@
 import Dashboard from '../views/Dashboard.vue'
 import BookingsHome from '../views/Bookings/Home.vue'
 
+import AddBooking from '../views/Bookings/Add.vue'
 
 import RoomsHome from '../views/Rooms/Home.vue'
 import AddRoom from '../views/Rooms/Add.vue'
@@ -33,6 +34,11 @@ const routes = [
         path: '/bookings', 
         component: BookingsHome, 
         name: "bookings"  
+    },
+    { 
+        path: '/bookings/add', 
+        component: AddBooking, 
+        name: "bookings_add"  
     },
 
 

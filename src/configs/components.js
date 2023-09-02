@@ -7,6 +7,9 @@ import Loading from '../components/Loading.vue'
 
 import Individual from '../components/Clients/Individual.vue'
 import Enterprise from '../components/Clients/Enterprise.vue'
+
+
+import "vue-inline-calendar/dist/style.css";
 /* 3rd Party Components */
 import Button from "primevue/button"
 import Calendar from 'primevue/calendar';
@@ -38,7 +41,7 @@ export function loadComponents(app) {
         .component('siine-loading', Loading)
         .component('siine-client-form-individual', Individual)
         .component('siine-client-form-enterprise', Enterprise)
-
+        
         
         .component('Button', Button)
         .component('Calendar', Calendar)

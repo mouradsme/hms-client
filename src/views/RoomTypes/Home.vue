@@ -42,7 +42,6 @@ import Utility from '../../js/functions'
     }, 
     methods: {
       loadRoomTypes(data) {
-        console.log(data)
         this.types = data.status == 'success' ? data.room_types : []
         this.loading = false
       } 

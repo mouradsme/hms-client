@@ -86,7 +86,6 @@ import {currency} from '../../configs/currency'
     }, 
     methods: {
         loadRooms(data) {
-          console.log('loading')
           this.rooms = data.status == 'success' ? data.rooms : []
           this.$emit('DataFetched')
           this.loading = false
