@@ -8,22 +8,18 @@
 
       <div class="form">
           <div class="p-inputgroup flex-1">
-            <InputText autocomplete="off"  v-model="type_name"  :placeholder="$t('types.type.name')" /> 
+            <InputText autocomplete="off"  v-model="name"  :placeholder="$t('types.type.name')" /> 
           </div> 
           <div class="p-inputgroup flex-1">
-              <InputNumber autocomplete="off"  v-model="number_of_beds" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('types.type.n_beds')" /> 
-              <InputNumber autocomplete="off"  v-model="number_of_people" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('types.type.n_people')" /> 
-              <InputNumber autocomplete="off"  v-model="number_of_babies" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('types.type.n_babies')" /> 
+              <InputNumber autocomplete="off"  v-model="default_number_of_beds" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('types.type.n_beds')" /> 
+              <InputNumber autocomplete="off"  v-model="default_number_of_people" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('types.type.n_people')" /> 
+              <InputNumber autocomplete="off"  v-model="default_number_of_babies" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('types.type.n_babies')" /> 
           </div>  
 
           <div class="switch-container p-inputgroup flex-1">
             <div class="switch">
               <label for="Refundable">{{ $t("types.type.refundable") }}</label>
-              <InputSwitch id="Refundable" v-model="refundable" /> 
-            </div>
-            <div class="switch">
-              <label for="Usable">{{ $t("rooms.room.usable") }}</label>
-              <InputSwitch id="Usable" v-model="usable" />
+              <InputSwitch id="Refundable" v-model="default_refundable" /> 
             </div>
           </div>
 
@@ -33,7 +29,7 @@
 
           </div>
           
-          <Button severity="success" :label="$t('buttons.create')" v-on:click="addRoom()" />
+          <Button severity="success" :label="$t('buttons.create')" v-on:click="addRoomType()" />
           
 
 
@@ -44,61 +40,57 @@
 import Utility from '../../js/functions'
 
 export default {
-  name: "Add Room",
+  name: "Add Room Type",
   components: {
   },
   data () {
     return {  
-      room_number: null,
-      room_name: '',
-      room_type: 0,
-      room_types: [],
+      name: '',
       description: '',
-      floor_number: null,
-      default_price: null,	
-      default_price_vat: null,	
-      default_vat: null,
-      number_of_beds: null,	
-      number_of_people: null,	
-      number_of_babies: null,
-      refundable: true,
-      usable: true,
-      forceupdateDefaultPriceVat: 0
-        
+      default_number_of_beds: null,	
+      default_number_of_people: null,	
+      default_number_of_babies: null,
+      default_refundable: true
      }
   },
   beforeMount() {
     let that = this
-    Utility.getDeferredReq('rooms/types', {}).then( response => that.loadRoomTypes(response) )
   }, 
   methods: { 
-    loadRoomTypes(data) {
-      this.room_types = data.status == 'success' ? data.room_types : []
-    },
-    addRoom() {
+    addRoomType() {
       let that = this
       let data = {
-        room_number: that.room_number,
-        room_name: that.room_name,
-        room_type: that.room_type,
+        name: that.name,
         description: that.description,
-        floor_number: that.floor_number,
-        default_price: that.default_price,	
-        default_price_vat: that.default_price_vat,	
-        default_vat: that.default_vat,
-        number_of_beds: that.number_of_beds,	
-        number_of_people: that.number_of_people,	
-        number_of_babies: that.number_of_babies,
-        refundable: that.refundable,
-        usable: that.usable
+        default_number_of_beds: that.default_number_of_beds,	
+        default_number_of_people: that.default_number_of_people,	
+        default_number_of_babies: that.default_number_of_babies,
+        default_refundable: that.default_refundable,
       }
-      Utility.postDeferredReq('rooms', data).then(response => {
+      Utility.postDeferredReq('types', data).then(response => {
         if (response.status == 'success') {
-          if (response.code == 'room_not_added') {
+          
+          if (response.code == 'roomtype_added') {
+              Utility.Swal.fire({
+                title: that.$t("success.title"),
+                text: that.$t("success.rooms.roomtype_added"),
+                icon: 'success',
+                confirmButtonText: that.$t("buttons.ok")
+              })
+              
+              that.name = ''
+              that.description = ''
+              that.default_number_of_beds = null	
+              that.default_number_of_people = null
+              that.default_number_of_babies = null
+
+            }
+
+          if (response.code == 'roomtype_not_added') {
           
             that.Utility.Swal.fire({
               title: that.$t("errors.title"),
-              text: that.$t("errors.rooms.room_not_added"),
+              text: that.$t("errors.rooms.roomtype_not_added"),
               icon: 'error',
               confirmButtonText: that.$t("buttons.back")
             })
@@ -115,13 +107,6 @@ export default {
         }
       })
     }, 
-    calculateVat() {
-      let vat = this.default_vat
-      let price = this.default_price
-      this.default_price_vat = parseFloat(price * (1 + parseFloat(vat/100))); 
-      this.forceupdateDefaultPriceVat = (new Date()).getTime()
-      this.$forceUpdate()
-    }
 
   }
 }

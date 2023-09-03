@@ -22,7 +22,7 @@
             </div> 
             <div class="p-inputgroup flex-1">
                 <InputNumber autocomplete="off" @input="calculateVat()" mode="currency" currency="DZD"  :min="0" v-model="default_price" :placeholder="$t('rooms.room.price')" /> 
-                <InputNumber autocomplete="off" @input="calculateVat()" :min="0" :max="100"  v-model="default_vat" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
+                <InputNumber autocomplete="off" @input="calculateVat()" :min="0" :max="100"  v-model="default_tax" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
                 <InputNumber mode="currency" currency="DZD" :key="forceupdateDefaultPriceVat" v-model="default_price_vat" readonly  :placeholder="$t('rooms.room.price_vat')" /> 
               </div>
 
@@ -67,7 +67,7 @@ import Utility from '../../js/functions'
         floor_number: null,
         default_price: null,	
         default_price_vat: null,	
-        default_vat: null,
+        default_tax: null,
         number_of_beds: null,	
         number_of_people: null,	
         number_of_babies: null,
@@ -95,7 +95,7 @@ import Utility from '../../js/functions'
           floor_number: that.floor_number,
           default_price: that.default_price,	
           default_price_vat: that.default_price_vat,	
-          default_vat: that.default_vat,
+          default_tax: that.default_tax,
           number_of_beds: that.number_of_beds,	
           number_of_people: that.number_of_people,	
           number_of_babies: that.number_of_babies,
@@ -136,7 +136,7 @@ import Utility from '../../js/functions'
         })
       }, 
       calculateVat() {
-        let vat = this.default_vat
+        let vat = this.default_tax
         let price = this.default_price
         this.default_price_vat = parseFloat(price * (1 + parseFloat(vat/100))); 
         this.forceupdateDefaultPriceVat = (new Date()).getTime()

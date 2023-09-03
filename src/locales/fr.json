@@ -28,7 +28,8 @@
         "title": "Erreur",
 
         "rooms": {
-            "room_not_added": "La chambre n'a pas été ajoutée"
+            "room_not_added": "La chambre n'a pas été ajoutée",
+            "roomtype_not_added": "Le type de chambre n'a pas été ajouté"
         },
         "clients": {
             "client_not_added": "Le client n'a pas été ajoutée"
@@ -38,7 +39,8 @@
         "title": "Ca marche!",
 
         "rooms": {
-            "room_added": "La chambre a été ajoutée"
+            "room_added": "La chambre a été ajoutée",
+            "roomtype_added": "Le type de chambre a été ajouté"
         }
     },
     "boot": {
@@ -59,14 +61,17 @@
     "buttons": {
         "create": "Créer",
         "back": "Retour",
-        "ok": "OK"
+        "ok": "OK",
+        
+        "available": "Chambres Disponibles"
     },
     "dashboard": {
         "title": "Tableau de bord",
         "room_stats": "Statistiques des Chambres"
     },
     "bookings_add": {
-        "title": "Réservations > Ajouter"
+        "title": "Réservations > Ajouter",
+        "period": "Période"
     },
     "rooms_add": {
         "title": "Chambres > Ajouter"
@@ -203,5 +208,6 @@
     },
     "bookings": {
         "title": "Réservations"
+        
     }
 }

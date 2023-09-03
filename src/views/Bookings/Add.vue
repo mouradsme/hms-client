@@ -4,44 +4,55 @@
       <siine-viewcontrols :routes='[
           { route: "/bookings", class: "back", title: this.$t("buttons.back"), icon: "backward"}
         ]'/>
-        <div class="form">
-            <div class="p-inputgroup flex-1">
-              <InputText autocomplete="off"  v-model="room_name"  :placeholder="$t('rooms.room.name')" /> 
-              <Dropdown v-model="room_type" :options="room_types" optionLabel="name" :placeholder="$t('rooms.room.type')" class="w-full md:w-14rem" />
-            </div>
-            <div class="p-inputgroup flex-1">
-                <InputNumber autocomplete="off"  v-model="room_number" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.number')" /> 
-                <InputNumber autocomplete="off"  v-model="floor_number" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.floor')" /> 
+        <div id="ReservationForm" class="form">
+            <div class="flex  gap-1">
+              <div class="flex flex-column gap-2">
+                <label for="room_type">{{$t('rooms.room.type')}}</label>
+                <Dropdown v-model="room_type" :options="room_types" id="room_type" optionLabel="name" :placeholder="$t('rooms.room.type')" class="w-full md:w-14rem" />
+              </div> 
+                
+              <div class="flex flex-column gap-2">
+                <label for="floor">{{$t('rooms.room.floor')}}</label>
+                <InputNumber autocomplete="off" id="floor" v-model="floor" :placeholder="$t('rooms.room.floor')" /> 
+              </div>
             </div> 
-            <div class="p-inputgroup flex-1">
-                <InputNumber autocomplete="off"  v-model="number_of_beds" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_beds')" /> 
-                <InputNumber autocomplete="off"  v-model="number_of_people" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_people')" /> 
-                <InputNumber autocomplete="off"  v-model="number_of_babies" inputId="withoutgrouping" :useGrouping="false"  :placeholder="$t('rooms.room.n_babies')" /> 
+
+            <div class="flex flex-3 gap-1">
+              <div class="flex flex-column gap-2">
+                <label for="number_of_beds">{{$t('rooms.room.n_beds')}}</label>
+                <InputNumber autocomplete="off" id="number_of_beds" v-model="number_of_beds" :placeholder="$t('rooms.room.n_beds')" /> 
+              </div>
+
+              <div class="flex flex-column gap-2">
+
+                <label for="number_of_people">{{$t('rooms.room.n_people')}}</label>
+                <InputNumber autocomplete="off" id="number_of_people"  v-model="number_of_people" :placeholder="$t('rooms.room.n_people')" /> 
+          
+              </div>
+              
+              <div class="flex flex-column gap-2">
+
+                <label for="number_of_babies">{{$t('rooms.room.n_babies')}}</label>
+                <InputNumber autocomplete="off" id="number_of_babies"  v-model="number_of_babies" :placeholder="$t('rooms.room.n_babies')" /> 
+          
+              </div>
+                
             </div> 
-            <div class="p-inputgroup flex-1">
-                <InputNumber autocomplete="off" @input="calculateVat()" mode="currency" currency="DZD"  :min="0" v-model="default_price" :placeholder="$t('rooms.room.price')" /> 
-                <InputNumber autocomplete="off" @input="calculateVat()" :min="0" :max="100"  v-model="default_vat" :useGrouping="false" :placeholder="$t('rooms.room.vat')" /> 
-                <InputNumber mode="currency" currency="DZD" :key="forceupdateDefaultPriceVat" v-model="default_price_vat" readonly  :placeholder="$t('rooms.room.price_vat')" /> 
-              </div>
+ 
+            <div class="flex flex-column gap-2">
 
-            <div class="switch-container p-inputgroup flex-1">
-              <div class="switch">
-                <label for="Refundable">{{ $t("rooms.room.refundable") }}</label>
-                <InputSwitch id="Refundable" v-model="refundable" /> 
-              </div>
-              <div class="switch">
-                <label for="Usable">{{ $t("rooms.room.usable") }}</label>
-                <InputSwitch id="Usable" v-model="usable" />
-              </div>
-            </div>
-
-            <h3>{{ $t('rooms.room.description') }}</h3>
-            <div class="p-inputgroup flex-1">
-              <Editor v-model="description" editorStyle="height: 20rem" />
-
-            </div>
+              <label for="">{{$t('bookings_add.period')}}</label>
             
-            <Button severity="success" :label="$t('buttons.create')" v-on:click="addRoom()" />
+            </div>
+ 
+            <div class="p-inputgroup flex-1">
+              <Calendar v-model="dates" selectionMode="range" :manualInput="false" />
+
+
+               </div> 
+ 
+            
+            <Button severity="success" :label="$t('buttons.available')" v-on:click="getAvailableRooms()" />
             
 
 
@@ -51,26 +62,64 @@
       </div>
 </template>
 <script>
-
+  import Utility from '../../js/functions';
   export default {
     name: "Add Booking",
     components: {
     },
     data () {
       return { 
-        
+        room_types: [],
+        room_type: null,
+        number_of_people: 1,
+        number_of_beds: 1,
+        number_of_babies: 0,
+        dates: null, 
+        floor: null
        }
     },
     mounted() {
-      
+      let that = this
+      Utility.getDeferredReq('rooms/types', {}).then( (response) => {
+        that.loadRoomTypes(response)
+      } )
       
      }, 
     methods: {
+      loadRoomTypes(data) {
+        this.room_types = data.status == 'success' ? data.room_types : []
+
+      },
+      getAvailableRooms() {
+        let that = this
+        let data = {
+          room_type: that.room_type,
+          number_of_babies: that.number_of_babies,
+          number_of_beds: that.number_of_beds,
+          number_of_people: that.number_of_babies,
+          dates: that.dates,
+          floor: that.floor
+        }
+        Utility.postDeferredReq('booking/availability', data).then( response => {
+          console.log(response)
+        })
+      }
     }
   }
 </script>
 
-<style>
+<style lang="scss">
+#ReservationForm {
 
+  & .input {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 100px auto;
+    justify-content: start;
+    align-items: center;
+
+
+  }
+}
  
 </style>
